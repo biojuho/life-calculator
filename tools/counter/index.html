@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>글자수 세기 — 생활계산서</title>
+<meta name="description" content="한글은 1자, 공백·줄 수, UTF-8 바이트와 EUC-KR 추정 바이트를 셉니다. 입력은 이 기기에만 남습니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://biojuho.github.io/life-calculator/tools/counter/">
+<meta property="og:title" content="글자수 세기 — 생활계산서">
+<meta property="og:description" content="한글은 1자, 공백·줄 수, UTF-8 바이트와 EUC-KR 추정 바이트를 셉니다. 입력은 이 기기에만 남습니다.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f3efe6">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../css/style.css">
+
+</head>
+<body>
+<header class="site">
+  <div class="wrap hbar">
+    <a class="brand" href="../../">
+      <span class="seal">計</span>
+      <span><strong>생활계산서</strong><small>바로 쓰는 생활 계산기</small></span>
+    </a>
+    <nav class="top">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/" aria-current="page">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+    </nav>
+    <button class="hamb" type="button" aria-expanded="false" aria-controls="mnav">메뉴</button>
+  </div>
+  <div class="wrap"><nav class="drawer" id="mnav">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/" aria-current="page">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+  </nav></div>
+</header>
+<main class="wrap layout">
+  <article class="panel">
+    <p class="crumbs"><a href="../../">생활계산서</a> · 글자수 세기</p>
+    <h1>글자수 세기</h1>
+    <p class="desc">한글은 1자, 공백·줄 수, UTF-8 바이트와 EUC-KR 추정 바이트를 셉니다. 입력은 이 기기에만 남습니다.</p>
+    <form id="f">
+  <label for="t">텍스트</label>
+  <textarea id="t" placeholder="여기에 붙여 넣으세요">안녕하세요. 생활계산서입니다.</textarea>
+  <label><input type="checkbox" id="ns"> 공백 빼고 세기 (결과에도 반영)</label>
+  <label><input type="checkbox" id="nn"> 줄바꿈 빼고 세기</label>
+  <div class="actions"><button type="submit">글자 수 세기</button></div>
+</form>
+    <div class="out" id="out" hidden></div>
+    <p class="note" id="note"></p>
+    <p class="source" id="source"></p>
+  </article>
+  <aside>
+    <div class="box">
+      <p class="pill">브라우저에서만 계산</p>
+      <p class="fine" style="margin-top:10px">입력값은 서버로 전송되지 않습니다. 결과를 저장하거나 공유하려면 화면을 직접 남겨 두세요.</p>
+    </div>
+  </aside>
+</main>
+
+<aside class="wrap" style="padding-bottom:8px">
+  <div class="aff-slot" data-affiliate-slot>
+    <p class="aff-label">제휴 안내 · 자리만 확보</p>
+    <p>관련 상품이나 서비스 소개를 넣을 칸입니다. 지금은 제휴 링크를 연결하지 않았습니다.</p>
+  </div>
+</aside>
+<footer class="site"><div class="wrap">
+  <p><strong>생활계산서</strong> · 계산 결과는 참고용입니다. 고지서, 홈택스, 근로계약, 대출 약정과 다를 수 있습니다.</p>
+  <p class="fine">2026년 공개 요율을 반영했습니다. 요율이 바뀌면 고지서나 공식 안내가 우선합니다. 개인정보는 서버에 보내지 않고 브라우저에서만 계산합니다.</p>
+  <p class="fine">GitHub Pages 배포용 정적 사이트 · 저장소는 아직 만들지 않았습니다.</p>
+</div></footer>
+<script>
+document.querySelector('.hamb')?.addEventListener('click', (e)=>{
+  const d=document.getElementById('mnav');
+  d.classList.toggle('open');
+  e.currentTarget.setAttribute('aria-expanded', d.classList.contains('open')?'true':'false');
+});
+</script>
+<script type="module">
+
+import { countText } from '../../js/calc.mjs';
+import { $, tableRows } from '../../js/ui.js';
+$('#note').textContent='글자 수는 유니코드 코드 포인트 기준입니다(이모지는 1자 또는 여러 코드 포인트일 수 있음). EUC-KR 바이트는 한글·한글 자모를 2바이트로 본 추정값이라, 특수문자는 실제 파일과 다를 수 있습니다.';
+$('#source').textContent='근거: 유니코드 코드 포인트, UTF-8 인코딩. EUC-KR은 추정입니다.';
+function run(e){ e?.preventDefault();
+  const r=countText($('#t').value,{ignoreSpaces:$('#ns').checked, ignoreNewlines:$('#nn').checked});
+  const out=$('#out'); out.hidden=false;
+  out.innerHTML=`<p class="sub">글자 수</p><p class="big">${r.chars.toLocaleString('ko-KR')}자</p>`+
+  tableRows(['항목','값'],[
+    ['글자 수 (현재 옵션)',r.chars.toLocaleString('ko-KR')],
+    ['공백 제외',r.noSpace.toLocaleString('ko-KR')],
+    ['모든 공백문자 제외',r.noWhitespace.toLocaleString('ko-KR')],
+    ['줄 수 (원문)',r.lines.toLocaleString('ko-KR')],
+    ['UTF-8 바이트',r.bytesUtf8.toLocaleString('ko-KR')],
+    ['EUC-KR 바이트 (추정)',r.bytesEucKrEstimate.toLocaleString('ko-KR')],
+  ]);
+}
+$('#t').addEventListener('input',()=>run({preventDefault(){}}));
+$('#ns').addEventListener('change',()=>run({preventDefault(){}}));
+$('#nn').addEventListener('change',()=>run({preventDefault(){}}));
+$('#f').addEventListener('submit',run);
+run({preventDefault(){}});
+
+</script>
+</body>
+</html>

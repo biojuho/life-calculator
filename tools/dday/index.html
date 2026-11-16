@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D-day 계산기 — 생활계산서</title>
+<meta name="description" content="기준일과 목표일의 차이를 D-Day, D-N, D+N으로 표시합니다. 날짜는 Asia/Seoul 달력 기준입니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://biojuho.github.io/life-calculator/tools/dday/">
+<meta property="og:title" content="D-day 계산기 — 생활계산서">
+<meta property="og:description" content="기준일과 목표일의 차이를 D-Day, D-N, D+N으로 표시합니다. 날짜는 Asia/Seoul 달력 기준입니다.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f3efe6">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../css/style.css">
+
+</head>
+<body>
+<header class="site">
+  <div class="wrap hbar">
+    <a class="brand" href="../../">
+      <span class="seal">計</span>
+      <span><strong>생활계산서</strong><small>바로 쓰는 생활 계산기</small></span>
+    </a>
+    <nav class="top">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/" aria-current="page">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+    </nav>
+    <button class="hamb" type="button" aria-expanded="false" aria-controls="mnav">메뉴</button>
+  </div>
+  <div class="wrap"><nav class="drawer" id="mnav">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/" aria-current="page">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+  </nav></div>
+</header>
+<main class="wrap layout">
+  <article class="panel">
+    <p class="crumbs"><a href="../../">생활계산서</a> · D-day</p>
+    <h1>D-day</h1>
+    <p class="desc">기준일과 목표일의 차이를 D-Day, D-N, D+N으로 표시합니다. 날짜는 Asia/Seoul 달력 기준입니다.</p>
+    <form id="f">
+  <div class="row">
+    <div><label for="from">기준일</label><input id="from" type="date"></div>
+    <div><label for="to">목표일</label><input id="to" type="date"></div>
+  </div>
+  <div class="actions"><button type="submit">디데이 계산</button><button type="button" class="sec" id="today">기준일을 오늘로</button></div>
+</form>
+    <div class="out" id="out" hidden></div>
+    <p class="note" id="note"></p>
+    <p class="source" id="source"></p>
+  </article>
+  <aside>
+    <div class="box">
+      <p class="pill">브라우저에서만 계산</p>
+      <p class="fine" style="margin-top:10px">입력값은 서버로 전송되지 않습니다. 결과를 저장하거나 공유하려면 화면을 직접 남겨 두세요.</p>
+    </div>
+  </aside>
+</main>
+
+<aside class="wrap" style="padding-bottom:8px">
+  <div class="aff-slot" data-affiliate-slot>
+    <p class="aff-label">제휴 안내 · 자리만 확보</p>
+    <p>관련 상품이나 서비스 소개를 넣을 칸입니다. 지금은 제휴 링크를 연결하지 않았습니다.</p>
+  </div>
+</aside>
+<footer class="site"><div class="wrap">
+  <p><strong>생활계산서</strong> · 계산 결과는 참고용입니다. 고지서, 홈택스, 근로계약, 대출 약정과 다를 수 있습니다.</p>
+  <p class="fine">2026년 공개 요율을 반영했습니다. 요율이 바뀌면 고지서나 공식 안내가 우선합니다. 개인정보는 서버에 보내지 않고 브라우저에서만 계산합니다.</p>
+  <p class="fine">GitHub Pages 배포용 정적 사이트 · 저장소는 아직 만들지 않았습니다.</p>
+</div></footer>
+<script>
+document.querySelector('.hamb')?.addEventListener('click', (e)=>{
+  const d=document.getElementById('mnav');
+  d.classList.toggle('open');
+  e.currentTarget.setAttribute('aria-expanded', d.classList.contains('open')?'true':'false');
+});
+</script>
+<script type="module">
+
+import { dday, todaySeoulISO, calendarDays } from '../../js/calc.mjs';
+import { $ } from '../../js/ui.js';
+$('#from').value=todaySeoulISO();
+$('#to').value=todaySeoulISO();
+$('#note').textContent='같은 날이면 D-Day, 목표일이 아직이면 D-N, 이미 지났으면 D+N 입니다. 시간대는 Asia/Seoul(UTC+9) 달력 날짜만 사용하며 시각은 세지 않습니다.';
+$('#source').textContent='근거: 그레고리력 날짜 차이. 표기는 한국에서 흔한 D-day 관습입니다.';
+function run(e){ e?.preventDefault();
+  const a=$('#from').value, b=$('#to').value;
+  const r=dday(b,a);
+  const out=$('#out'); out.hidden=false;
+  const msg=r.direction===0?'오늘이 목표일입니다.':r.direction<0?`목표일까지 ${r.days}일 남았습니다.`:`목표일로부터 ${r.days}일 지났습니다.`;
+  out.innerHTML=`<p class="sub">${a} → ${b}</p><p class="big">${r.label}</p><p class="sub">${msg}</p>`;
+}
+$('#today').addEventListener('click',()=>{$('#from').value=todaySeoulISO(); run({preventDefault(){}});});
+$('#f').addEventListener('submit',run);
+run({preventDefault(){}});
+
+</script>
+</body>
+</html>
