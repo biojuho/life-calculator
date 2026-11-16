@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대출 이자 계산기 (원리금균등·원금균등) — 생활계산서</title>
+<meta name="description" content="원금, 연이율, 기간을 넣으면 원리금균등 또는 원금균등 상환의 월 납입금과 이자 합계를 계산합니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://biojuho.github.io/life-calculator/tools/loan/">
+<meta property="og:title" content="대출 이자 계산기 (원리금균등·원금균등) — 생활계산서">
+<meta property="og:description" content="원금, 연이율, 기간을 넣으면 원리금균등 또는 원금균등 상환의 월 납입금과 이자 합계를 계산합니다.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f3efe6">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../css/style.css">
+
+</head>
+<body>
+<header class="site">
+  <div class="wrap hbar">
+    <a class="brand" href="../../">
+      <span class="seal">計</span>
+      <span><strong>생활계산서</strong><small>바로 쓰는 생활 계산기</small></span>
+    </a>
+    <nav class="top">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/" aria-current="page">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+    </nav>
+    <button class="hamb" type="button" aria-expanded="false" aria-controls="mnav">메뉴</button>
+  </div>
+  <div class="wrap"><nav class="drawer" id="mnav">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/" aria-current="page">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+  </nav></div>
+</header>
+<main class="wrap layout">
+  <article class="panel">
+    <p class="crumbs"><a href="../../">생활계산서</a> · 대출 이자</p>
+    <h1>대출 이자</h1>
+    <p class="desc">원금, 연이율, 기간을 넣으면 원리금균등 또는 원금균등 상환의 월 납입금과 이자 합계를 계산합니다.</p>
+    <form id="f">
+  <div class="row">
+    <div><label for="P">대출 원금 (원)</label><input id="P" data-won inputmode="numeric" value="100,000,000"></div>
+    <div><label for="rate">연 이율 (%)</label><input id="rate" type="number" step="0.01" min="0" value="3.5"></div>
+  </div>
+  <div class="row">
+    <div><label for="years">기간 (년)</label><input id="years" type="number" min="0" step="1" value="30"></div>
+    <div><label for="months">또는 개월 수</label><input id="months" type="number" min="1" step="1" placeholder="비우면 년×12"></div>
+  </div>
+  <label for="method">상환 방식</label>
+  <select id="method"><option value="eqpay">원리금균등</option><option value="eqprin">원금균등</option></select>
+  <div class="actions"><button type="submit">상환 스케줄 보기</button></div>
+</form>
+    <div class="out" id="out" hidden></div>
+    <p class="note" id="note"></p>
+    <p class="source" id="source"></p>
+  </article>
+  <aside>
+    <div class="box">
+      <p class="pill">브라우저에서만 계산</p>
+      <p class="fine" style="margin-top:10px">입력값은 서버로 전송되지 않습니다. 결과를 저장하거나 공유하려면 화면을 직접 남겨 두세요.</p>
+    </div>
+  </aside>
+</main>
+
+<aside class="wrap" style="padding-bottom:8px">
+  <div class="aff-slot" data-affiliate-slot>
+    <p class="aff-label">제휴 안내 · 자리만 확보</p>
+    <p>관련 상품이나 서비스 소개를 넣을 칸입니다. 지금은 제휴 링크를 연결하지 않았습니다.</p>
+  </div>
+</aside>
+<footer class="site"><div class="wrap">
+  <p><strong>생활계산서</strong> · 계산 결과는 참고용입니다. 고지서, 홈택스, 근로계약, 대출 약정과 다를 수 있습니다.</p>
+  <p class="fine">2026년 공개 요율을 반영했습니다. 요율이 바뀌면 고지서나 공식 안내가 우선합니다. 개인정보는 서버에 보내지 않고 브라우저에서만 계산합니다.</p>
+  <p class="fine">GitHub Pages 배포용 정적 사이트 · 저장소는 아직 만들지 않았습니다.</p>
+</div></footer>
+<script>
+document.querySelector('.hamb')?.addEventListener('click', (e)=>{
+  const d=document.getElementById('mnav');
+  d.classList.toggle('open');
+  e.currentTarget.setAttribute('aria-expanded', d.classList.contains('open')?'true':'false');
+});
+</script>
+<script type="module">
+
+import { loanEqualPayment, loanEqualPrincipal } from '../../js/calc.mjs';
+import { $, num, won, bindWonInputs, tableRows } from '../../js/ui.js';
+bindWonInputs();
+$('#note').textContent='월 이자율 = 연이율÷12 인 표준 모형입니다. 실제 대출은 일수 계산, 중도상환 수수료, 우대금리에 따라 달라질 수 있습니다. 금융 상품을 권하거나 금리를 단정하지 않습니다.';
+$('#source').textContent='근거: 원리금균등·원금균등 상환의 일반 공식. 특정 은행 상품 약정과는 별개입니다.';
+function run(e){ e?.preventDefault();
+  const P=num($('#P')); const annual=(Number($('#rate').value)||0)/100;
+  let n=Math.floor(Number($('#months').value)||0);
+  if(!n) n=Math.floor((Number($('#years').value)||0)*12);
+  const method=$('#method').value;
+  const r=method==='eqprin'?loanEqualPrincipal(P,annual,n):loanEqualPayment(P,annual,n);
+  const out=$('#out'); out.hidden=false;
+  const head=method==='eqprin'?`첫 달 ${won(r.monthlyFirst)} · 마지막 달 ${won(r.monthlyLast)}`:`매월 ${won(r.monthly)}`;
+  const rows=r.schedule.slice(0,24).map(s=>[s.month+'개월',won(s.payment),won(s.principal),won(s.interest),won(s.balance)]);
+  out.innerHTML=`<p class="sub">${method==='eqprin'?'원금균등':'원리금균등'} 월 납입</p><p class="big">${method==='eqprin'?won(r.monthlyFirst):won(r.monthly)}</p>
+  <p class="sub">${head}<br>이자 합계 ${won(r.totalInterest)} · 총 상환 ${won(r.totalPay)}</p>
+  <p class="fine">아래는 앞 24회차입니다. 전체 ${r.schedule.length}회.</p>
+  <div class="sched">${tableRows(['회차','납입','원금','이자','잔액'], rows)}</div>`;
+}
+$('#f').addEventListener('submit',run);
+run({preventDefault(){}});
+
+</script>
+</body>
+</html>

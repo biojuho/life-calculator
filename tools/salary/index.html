@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>연봉 실수령액 계산기 (2026년 4대보험·간이세액표) — 생활계산서</title>
+<meta name="description" content="2026년 4대보험 요율과 국세청 근로소득 간이세액표로 월 실수령액과 공제 내역을 계산합니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://biojuho.github.io/life-calculator/tools/salary/">
+<meta property="og:title" content="연봉 실수령액 계산기 (2026년 4대보험·간이세액표) — 생활계산서">
+<meta property="og:description" content="2026년 4대보험 요율과 국세청 근로소득 간이세액표로 월 실수령액과 공제 내역을 계산합니다.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f3efe6">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../css/style.css">
+
+</head>
+<body>
+<header class="site">
+  <div class="wrap hbar">
+    <a class="brand" href="../../">
+      <span class="seal">計</span>
+      <span><strong>생활계산서</strong><small>바로 쓰는 생활 계산기</small></span>
+    </a>
+    <nav class="top">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/" aria-current="page">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+    </nav>
+    <button class="hamb" type="button" aria-expanded="false" aria-controls="mnav">메뉴</button>
+  </div>
+  <div class="wrap"><nav class="drawer" id="mnav">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/" aria-current="page">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+  </nav></div>
+</header>
+<main class="wrap layout">
+  <article class="panel">
+    <p class="crumbs"><a href="../../">생활계산서</a> · 연봉 실수령액</p>
+    <h1>연봉 실수령액</h1>
+    <p class="desc">2026년 4대보험 요율과 국세청 근로소득 간이세액표로 월 실수령액과 공제 내역을 계산합니다.</p>
+    <form id="f">
+  <div class="row">
+    <div><label for="annual">세전 연봉 (원)</label><input id="annual" data-won inputmode="numeric" value="50,000,000"></div>
+    <div><label for="nontax">월 비과세 (식대 등, 원)</label><input id="nontax" data-won inputmode="numeric" value="0"></div>
+  </div>
+  <div class="row">
+    <div><label for="dep">공제대상 가족 수 (본인 포함)</label>
+      <select id="dep"><option value="1" selected>1명</option><option value="2">2명</option><option value="3">3명</option><option value="4">4명</option><option value="5">5명</option><option value="6">6명</option><option value="7">7명</option><option value="8">8명</option><option value="9">9명</option><option value="10">10명</option><option value="11">11명</option></select>
+    </div>
+    <div><label for="kids">그중 8세~20세 자녀 수</label>
+      <select id="kids"><option value="0">0명</option><option value="1">1명</option><option value="2">2명</option><option value="3">3명</option><option value="4">4명</option><option value="5">5명</option><option value="6">6명</option><option value="7">7명</option></select>
+    </div>
+  </div>
+  <label for="rate">원천징수 비율 (맞춤형)</label>
+  <select id="rate"><option value="80">80%</option><option value="100" selected>100% (기본)</option><option value="120">120%</option></select>
+  <div class="actions"><button type="submit">실수령액 계산</button><button type="reset" class="sec">지우기</button></div>
+</form>
+    <div class="out" id="out" hidden></div>
+    <p class="note" id="note"></p>
+    <p class="source" id="source"></p>
+  </article>
+  <aside>
+    <div class="box">
+      <p class="pill">브라우저에서만 계산</p>
+      <p class="fine" style="margin-top:10px">입력값은 서버로 전송되지 않습니다. 결과를 저장하거나 공유하려면 화면을 직접 남겨 두세요.</p>
+    </div>
+  </aside>
+</main>
+
+<aside class="wrap" style="padding-bottom:8px">
+  <div class="aff-slot" data-affiliate-slot>
+    <p class="aff-label">제휴 안내 · 자리만 확보</p>
+    <p>관련 상품이나 서비스 소개를 넣을 칸입니다. 지금은 제휴 링크를 연결하지 않았습니다.</p>
+  </div>
+</aside>
+<footer class="site"><div class="wrap">
+  <p><strong>생활계산서</strong> · 계산 결과는 참고용입니다. 고지서, 홈택스, 근로계약, 대출 약정과 다를 수 있습니다.</p>
+  <p class="fine">2026년 공개 요율을 반영했습니다. 요율이 바뀌면 고지서나 공식 안내가 우선합니다. 개인정보는 서버에 보내지 않고 브라우저에서만 계산합니다.</p>
+  <p class="fine">GitHub Pages 배포용 정적 사이트 · 저장소는 아직 만들지 않았습니다.</p>
+</div></footer>
+<script>
+document.querySelector('.hamb')?.addEventListener('click', (e)=>{
+  const d=document.getElementById('mnav');
+  d.classList.toggle('open');
+  e.currentTarget.setAttribute('aria-expanded', d.classList.contains('open')?'true':'false');
+});
+</script>
+<script type="module">
+
+import { takeHome, formatWon } from '../../js/calc.mjs';
+import { $, num, won, bindWonInputs, tableRows } from '../../js/ui.js';
+bindWonInputs();
+const note=`국민연금 근로자 4.75%, 건강보험 3.595%, 장기요양 건강보험료의 13.14%, 고용보험 0.9%. 국민연금 기준소득월액 하한 41만원·상한 659만원(2026년 7월~2027년 6월, 보건복지부고시 제2026-31호). 근로소득세는 소득세법 시행령 별표2 간이세액표(2026.2.27. 개정, 2026.3.1. 적용) 100% 기준이며, 지방소득세는 그 10%(원 미만 절사)입니다. 연말정산·건강보험 정산·회사 복지에 따라 실제 명세서와 다를 수 있습니다.`;
+$('#source').textContent='근거: 보건복지부고시 제2026-31호, 소득세법 시행령 별표2, 국민건강보험 2026년 요율, 고용보험 실업급여 근로자 부담 0.9%.';
+$('#note').textContent=note;
+function run(e){ e?.preventDefault();
+  const r=takeHome({annual:num($('#annual')), nontaxable:num($('#nontax')), dependents:+$('#dep').value, children8to20:+$('#kids').value, ratePct:+$('#rate').value});
+  const out=$('#out'); out.hidden=false;
+  out.innerHTML=`<p class="sub">월 실수령액</p><p class="big">${won(r.netMonth)}</p>
+  <p class="sub">연 실수령액 ${won(r.netYear)} · 세전 월급 ${won(r.monthly)}</p>`+
+  tableRows(['항목','금액'],[
+    ['세전 월급',won(r.monthly)],
+    ['비과세',won(r.nontaxable)],
+    ['과세 월급',won(r.taxable)],
+    ['국민연금 (4.75%)',won(r.pension)],
+    ['건강보험 (3.595%)',won(r.health)],
+    ['장기요양보험',won(r.ltc)],
+    ['고용보험 (0.9%)',won(r.employment)],
+    ['근로소득세',won(r.incomeTax)],
+    ['지방소득세 (10%)',won(r.local)],
+    ['공제 합계',won(r.deduct)],
+    ['월 실수령액',won(r.netMonth)],
+  ]);
+}
+$('#f').addEventListener('submit',run);
+$('#f').addEventListener('reset',()=>setTimeout(()=>$('#out').hidden=true,0));
+run({preventDefault(){}});
+
+</script>
+</body>
+</html>
