@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>퇴직금 계산기 (평균임금·재직일수) — 생활계산서</title>
+<meta name="description" content="근로자퇴직급여 보장법에 따라 평균임금과 재직 일수로 퇴직금을 계산합니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://biojuho.github.io/life-calculator/tools/severance/">
+<meta property="og:title" content="퇴직금 계산기 (평균임금·재직일수) — 생활계산서">
+<meta property="og:description" content="근로자퇴직급여 보장법에 따라 평균임금과 재직 일수로 퇴직금을 계산합니다.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f3efe6">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../css/style.css">
+
+</head>
+<body>
+<header class="site">
+  <div class="wrap hbar">
+    <a class="brand" href="../../">
+      <span class="seal">計</span>
+      <span><strong>생활계산서</strong><small>바로 쓰는 생활 계산기</small></span>
+    </a>
+    <nav class="top">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/" aria-current="page">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+    </nav>
+    <button class="hamb" type="button" aria-expanded="false" aria-controls="mnav">메뉴</button>
+  </div>
+  <div class="wrap"><nav class="drawer" id="mnav">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/" aria-current="page">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+  </nav></div>
+</header>
+<main class="wrap layout">
+  <article class="panel">
+    <p class="crumbs"><a href="../../">생활계산서</a> · 퇴직금</p>
+    <h1>퇴직금</h1>
+    <p class="desc">근로자퇴직급여 보장법에 따라 평균임금과 재직 일수로 퇴직금을 계산합니다.</p>
+    <form id="f">
+  <div class="row">
+    <div><label for="start">입사일</label><input id="start" type="date" value="2023-01-01"></div>
+    <div><label for="end">퇴직일 (퇴직하는 날)</label><input id="end" type="date" value="2026-01-01"></div>
+  </div>
+  <div class="row">
+    <div><label for="w1">퇴직 전 1개월째 임금 (원)</label><input id="w1" data-won inputmode="numeric" value="3,000,000"></div>
+    <div><label for="d1">그달 일수</label><input id="d1" type="number" min="1" value="31"></div>
+  </div>
+  <div class="row">
+    <div><label for="w2">2개월째 임금 (원)</label><input id="w2" data-won inputmode="numeric" value="3,000,000"></div>
+    <div><label for="d2">그달 일수</label><input id="d2" type="number" min="1" value="30"></div>
+  </div>
+  <div class="row">
+    <div><label for="w3">3개월째 임금 (원)</label><input id="w3" data-won inputmode="numeric" value="3,000,000"></div>
+    <div><label for="d3">그달 일수</label><input id="d3" type="number" min="1" value="31"></div>
+  </div>
+  <label for="ord">일 통상임금 (원, 선택). 평균임금보다 높으면 이 값을 씁니다.</label>
+  <input id="ord" data-won inputmode="numeric" placeholder="비워 두면 평균임금만 사용">
+  <p class="fine">계속근로 1년 미만은 법정 퇴직금 대상이 아닐 수 있습니다. 이 계산기는 그 여부를 판단하지 않고 산식만 보여 줍니다.</p>
+  <div class="actions"><button type="submit">퇴직금 계산</button></div>
+</form>
+    <div class="out" id="out" hidden></div>
+    <p class="note" id="note"></p>
+    <p class="source" id="source"></p>
+  </article>
+  <aside>
+    <div class="box">
+      <p class="pill">브라우저에서만 계산</p>
+      <p class="fine" style="margin-top:10px">입력값은 서버로 전송되지 않습니다. 결과를 저장하거나 공유하려면 화면을 직접 남겨 두세요.</p>
+    </div>
+  </aside>
+</main>
+
+<aside class="wrap" style="padding-bottom:8px">
+  <div class="aff-slot" data-affiliate-slot>
+    <p class="aff-label">제휴 안내 · 자리만 확보</p>
+    <p>관련 상품이나 서비스 소개를 넣을 칸입니다. 지금은 제휴 링크를 연결하지 않았습니다.</p>
+  </div>
+</aside>
+<footer class="site"><div class="wrap">
+  <p><strong>생활계산서</strong> · 계산 결과는 참고용입니다. 고지서, 홈택스, 근로계약, 대출 약정과 다를 수 있습니다.</p>
+  <p class="fine">2026년 공개 요율을 반영했습니다. 요율이 바뀌면 고지서나 공식 안내가 우선합니다. 개인정보는 서버에 보내지 않고 브라우저에서만 계산합니다.</p>
+  <p class="fine">GitHub Pages 배포용 정적 사이트 · 저장소는 아직 만들지 않았습니다.</p>
+</div></footer>
+<script>
+document.querySelector('.hamb')?.addEventListener('click', (e)=>{
+  const d=document.getElementById('mnav');
+  d.classList.toggle('open');
+  e.currentTarget.setAttribute('aria-expanded', d.classList.contains('open')?'true':'false');
+});
+</script>
+<script type="module">
+
+import { severancePay, calendarDays } from '../../js/calc.mjs';
+import { $, num, won, bindWonInputs, tableRows } from '../../js/ui.js';
+bindWonInputs();
+$('#note').textContent='퇴직금 = 1일 평균임금 × 30일 × (재직일수 ÷ 365). 평균임금 = 퇴직일 이전 3개월 임금 총액 ÷ 그 기간 일수. 평균임금이 통상임금보다 낮으면 통상임금을 씁니다. 육아휴직 등 제외 기간은 직접 빼고 입력해 주세요.';
+$('#source').textContent='근거: 근로자퇴직급여 보장법, 고용노동부 퇴직금 계산 안내, 찾기쉬운 생활법령정보 「퇴직금 지급」.';
+function run(e){ e?.preventDefault();
+  const start=$('#start').value, end=$('#end').value;
+  const service=calendarDays(start,end);
+  const wage=num($('#w1'))+num($('#w2'))+num($('#w3'));
+  const days=num($('#d1'))+num($('#d2'))+num($('#d3'));
+  const ord=num($('#ord'));
+  const r=severancePay({wage3monthTotal:wage, days3month:days, serviceDays:service, ordinaryDaily:ord||0});
+  const out=$('#out'); out.hidden=false;
+  out.innerHTML=`<p class="sub">추정 퇴직금</p><p class="big">${won(r.amount)}</p>
+  <p class="sub">재직 ${service}일 (${(service/365).toFixed(2)}년) · 퇴직일 자체는 재직 일수에 넣지 않는 방식이 일반적이므로, 입사일부터 퇴직일 전날까지로 바꾸려면 퇴직일을 하루 앞당겨 입력하세요.</p>`+
+  tableRows(['항목','값'],[
+    ['3개월 임금 합계',won(wage)],
+    ['3개월 일수',days+'일'],
+    ['1일 평균임금',won(r.avgDaily)],
+    ['적용 1일 임금',won(r.usedDaily)],
+    ['재직 일수 (입력 날짜 차)',service+'일'],
+    ['퇴직금',won(r.amount)],
+  ]);
+}
+$('#f').addEventListener('submit',run);
+run({preventDefault(){}});
+
+</script>
+</body>
+</html>
