@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>인터넷 요금 비교 계산기 (위약금·약정 갈아타기) — 생활계산서</title>
+<meta name="description" content="지금 내는 인터넷·TV 요금과 새 요금제를 약정 기간 총액으로 비교합니다. 위약금과 설치비를 넣으면 월 평균 절감액과 위약금 회수 개월이 나옵니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://biojuho.github.io/life-calculator/tools/internet/">
+<meta property="og:title" content="인터넷 요금 비교 계산기 (위약금·약정 갈아타기) — 생활계산서">
+<meta property="og:description" content="지금 내는 인터넷·TV 요금과 새 요금제를 약정 기간 총액으로 비교합니다. 위약금과 설치비를 넣으면 월 평균 절감액과 위약금 회수 개월이 나옵니다.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f3efe6">
+<meta property="og:url" content="https://biojuho.github.io/life-calculator/tools/internet/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"인터넷 요금 비교 계산기","url":"https://biojuho.github.io/life-calculator/tools/internet/","applicationCategory":"FinanceApplication","operatingSystem":"All","inLanguage":"ko","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"}}</script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../css/style.css">
+
+<style>
+.cta{margin-top:18px;border:1px solid var(--rule2);border-radius:14px;padding:14px 16px;background:#fffdf6}
+.cta .aff-label{margin-bottom:8px}
+.cta a.btn,.cta span.btn{display:inline-block;text-decoration:none}
+.cta span.btn{background:var(--rule);color:var(--ink2);cursor:default}
+.verdict{display:inline-block;margin:6px 0 10px;padding:4px 10px;border-radius:999px;font-size:14px;font-weight:700;background:var(--green-soft);color:var(--green)}
+.verdict.warn{background:var(--stamp-soft);color:var(--stamp)}
+.hint{font-size:12px;color:var(--ink2);margin:4px 0 0}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap hbar">
+    <a class="brand" href="../../">
+      <span class="seal">計</span>
+      <span><strong>생활계산서</strong><small>바로 쓰는 생활 계산기</small></span>
+    </a>
+    <nav class="top">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+      <a href="../../tools/internet/" aria-current="page">인터넷 요금</a>
+    </nav>
+    <button class="hamb" type="button" aria-expanded="false" aria-controls="mnav">메뉴</button>
+  </div>
+  <div class="wrap"><nav class="drawer" id="mnav">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+      <a href="../../tools/internet/" aria-current="page">인터넷 요금</a>
+  </nav></div>
+</header>
+<main class="wrap layout">
+  <article class="panel">
+    <p class="crumbs"><a href="../../">생활계산서</a> · 인터넷 요금 비교</p>
+    <h1>인터넷 요금 비교</h1>
+    <p class="desc">지금 쓰는 인터넷(+TV)을 계속 쓸 때와, 위약금을 내고 새 요금제로 갈아탈 때의 총액을 새 약정 기간 기준으로 비교합니다.</p>
+    <form id="f">
+  <p class="pill">지금 쓰는 상품</p>
+  <div class="row">
+    <div><label for="cur">지금 내는 월 요금 (원, 인터넷+TV 합계)</label><input id="cur" type="text" inputmode="numeric" data-won value="38,500"><p class="hint">고지서의 할인 적용 후 금액, 부가세 포함.</p></div>
+    <div><label for="rem">약정 남은 개월</label><input id="rem" type="number" min="0" max="60" step="1" value="8"><p class="hint">약정이 끝났으면 0.</p></div>
+  </div>
+  <div class="row">
+    <div><label for="pen">예상 위약금 (원, 선택)</label><input id="pen" type="text" inputmode="numeric" data-won value="120,000"><p class="hint">통신사 앱·고객센터에서 조회한 금액. 모르면 0.</p></div>
+    <div></div>
+  </div>
+  <p class="pill" style="margin-top:18px">새로 알아본 상품</p>
+  <div class="row">
+    <div><label for="nw">새 요금제 월 요금 (원)</label><input id="nw" type="text" inputmode="numeric" data-won value="27,500"><p class="hint">약정·결합 할인 적용 후 실제 낼 월 금액.</p></div>
+    <div><label for="term">새 약정 기간</label>
+      <select id="term"><option value="12">1년 (12개월)</option><option value="24">2년 (24개월)</option><option value="36" selected>3년 (36개월)</option><option value="0">약정 없음 (12개월로 비교)</option></select>
+    </div>
+  </div>
+  <div class="row">
+    <div><label for="ben">요금 혜택 합계 (원, 선택)</label><input id="ben" type="text" inputmode="numeric" data-won value="0"><p class="hint">요금 할인·면제처럼 계약서에 적힌 요금 혜택만 넣으세요.</p></div>
+    <div><label for="inst">설치비·가입비 (원, 선택)</label><input id="inst" type="text" inputmode="numeric" data-won value="36,000"></div>
+  </div>
+  <p class="fine">기본값은 계산 방법을 보여 주기 위한 <strong>예시값</strong>이며 특정 통신사의 실제 요금이 아닙니다. 본인 고지서와 상담 견적의 금액으로 바꿔 넣으세요.</p>
+  <div class="actions"><button type="submit">비교하기</button></div>
+</form>
+    <div class="out" id="out" hidden></div>
+    <div class="cta" id="cta" hidden></div>
+    <p class="note" id="note"></p>
+    <p class="source" id="source"></p>
+  </article>
+  <aside>
+    <div class="box">
+      <p class="pill">브라우저에서만 계산</p>
+      <p class="fine" style="margin-top:10px">입력값은 서버로 전송되지 않습니다. 결과를 저장하거나 공유하려면 화면을 직접 남겨 두세요.</p>
+    </div>
+    <div class="box">
+      <p class="pill">갈아타기 전 확인할 것</p>
+      <p class="fine" style="margin-top:10px">① 위약금은 남은 약정과 받은 할인에 따라 달라집니다. 해지 전 통신사에 정확한 금액을 확인하세요.<br>② 휴대폰 결합 할인이 있으면 해지할 때 휴대폰 요금도 오를 수 있습니다.<br>③ 약정이 끝난 뒤 지금 통신사에 재약정 할인을 문의하는 것도 방법입니다.</p>
+    </div>
+  </aside>
+</main>
+
+<aside class="wrap" style="padding-bottom:8px">
+  <div class="aff-slot" data-affiliate-slot>
+    <p class="aff-label">제휴 안내 · 자리만 확보</p>
+    <p>관련 상품이나 서비스 소개를 넣을 칸입니다. 지금은 제휴 링크를 연결하지 않았습니다.</p>
+  </div>
+</aside>
+<footer class="site"><div class="wrap">
+  <p><strong>생활계산서</strong> · 계산 결과는 참고용입니다. 고지서, 홈택스, 근로계약, 대출 약정과 다를 수 있습니다.</p>
+  <p class="fine">2026년 공개 요율을 반영했습니다. 요율이 바뀌면 고지서나 공식 안내가 우선합니다. 개인정보는 서버에 보내지 않고 브라우저에서만 계산합니다.</p>
+  <p class="fine">GitHub Pages로 배포하는 정적 사이트입니다.</p>
+</div></footer>
+<script>
+document.querySelector('.hamb')?.addEventListener('click', (e)=>{
+  const d=document.getElementById('mnav');
+  d.classList.toggle('open');
+  e.currentTarget.setAttribute('aria-expanded', d.classList.contains('open')?'true':'false');
+});
+</script>
+<script type="module">
+import { internetSwitch } from '../../js/calc.mjs';
+import { $, num, won, tableRows, bindWonInputs } from '../../js/ui.js';
+import { CTA } from '../../js/cta-config.js';
+bindWonInputs();
+$('#note').textContent='비교 기간은 새 약정 기간입니다. 지금 요금은 그 기간 동안 그대로 낸다고 가정했고, 약정 만료 후 요금 변동, 결합 할인 해지로 늘어나는 휴대폰 요금, 위약금의 일할 계산은 넣지 않았습니다. 실제 금액은 계약서와 통신사 안내가 우선합니다.';
+$('#source').textContent='요금 수치: 내장하지 않음. 모든 금액은 이용자가 입력하며, 기본값은 예시값입니다.';
+const esc=(t)=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function renderCta(){
+  const c=CTA.internet, box=$('#cta');
+  if(!c){box.hidden=true;return;}
+  box.hidden=false;
+  const live=c.enabled && /^https:\/\//.test(c.url||'');
+  box.innerHTML = live
+    ? `<p class="aff-label">광고 · 제휴 링크${c.partner?' · '+esc(c.partner):''}</p><p class="fine" style="margin:0 0 10px">${esc(c.disclosure)}</p><a class="btn" href="${esc(c.url)}" target="_blank" rel="sponsored noopener">${esc(c.label)}</a>`
+    : `<p class="aff-label">상담 연결 · 준비 중</p><p class="fine" style="margin:0 0 10px">요금 상담 연결은 아직 준비 중입니다. 지금은 계산 결과를 들고 통신사에 직접 문의해 주세요.</p><span class="btn" aria-disabled="true">준비 중</span>`;
+}
+function run(e){ e?.preventDefault();
+  const termSel=Number($('#term').value);
+  const r=internetSwitch({
+    currentMonthly:num($('#cur')), remainingMonths:Number($('#rem').value)||0, penalty:num($('#pen')),
+    newMonthly:num($('#nw')), newTermMonths:termSel||12, benefit:num($('#ben')), installFee:num($('#inst')),
+  });
+  const pay = r.paybackMonths===null ? '회수 안 됨 (새 요금이 더 비쌈)' : (r.paybackMonths===0 ? '바로 (혜택이 위약금·설치비보다 큼)' : `${r.paybackMonths}개월`);
+  const labels={stay:'지금 상품 유지',now:'지금 갈아타기',wait:'남은 약정 뒤 갈아타기'};
+  const good = r.best!=='stay';
+  const rows=[
+    [`지금 상품 유지 (${r.term}개월)`,won(r.stayTotal)],
+    [`지금 갈아타기 (위약금·설치비 포함, 혜택 차감)`,won(r.switchNowTotal)],
+  ];
+  if(r.remainingMonths>0) rows.push([`남은 ${r.remainingMonths}개월 채운 뒤 갈아타기 (위약금 없음 가정)`,won(r.waitTotal)]);
+  rows.push(['월 요금 차이',won(r.monthlyDiff)]);
+  rows.push(['갈아탈 때 한 번에 드는 순비용',won(r.upfront)]);
+  rows.push(['위약금 회수 기간',pay]);
+  const out=$('#out'); out.hidden=false;
+  out.innerHTML=`<p class="sub">지금 갈아타면 ${r.term}개월 동안 ${r.savingsNow>=0?'절약':'추가 지출'}</p><p class="big">${won(Math.abs(r.savingsNow))}</p>`+
+   `<p class="sub">월 평균 ${won(Math.abs(r.monthlySavingsNow))} ${r.monthlySavingsNow>=0?'절감':'증가'}</p>`+
+   `<p class="verdict${good?'':' warn'}">가장 적게 드는 선택: ${labels[r.best]}</p>`+
+   tableRows(['항목','금액'],rows);
+  renderCta();
+}
+$('#f').addEventListener('submit',run);
+run({preventDefault(){}});
+</script>
+</body>
+</html>
