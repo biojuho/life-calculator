@@ -413,3 +413,56 @@ export function formatWon(n) {
 }
 
 export { wonFloor, wonRound, wonFloor10 };
+
+/* 인터넷(+TV) 요금 비교: 지금 요금 유지 vs 지금 해지 후 갈아타기 vs 남은 약정 뒤 갈아타기.
+ * 요금·위약금·혜택은 모두 사용자 입력값입니다. 통신사 공시 요금을 내장하지 않습니다.
+ * 비교 기간 = 새 약정기간(개월). 기존 요금은 그 기간 동안 그대로 낸다고 가정합니다.
+ * 회수 개월 = (위약금 + 설치비 − 요금 혜택) ÷ (지금 월요금 − 새 월요금), 올림.
+ */
+export function internetSwitch({
+  currentMonthly = 0, remainingMonths = 0, penalty = 0,
+  newMonthly = 0, newTermMonths = 36, benefit = 0, installFee = 0,
+} = {}) {
+  const n = (v) => Math.max(0, Number(v) || 0);
+  const cur = n(currentMonthly), nw = n(newMonthly), pen = n(penalty), ben = n(benefit), inst = n(installFee);
+  const term = Math.max(1, Math.round(n(newTermMonths) || 1));
+  const rem = Math.min(term, Math.round(n(remainingMonths)));
+
+  const stayTotal = cur * term;
+  const upfront = pen + inst - ben;               // 갈아탈 때 한 번에 드는 순비용(음수면 혜택이 더 큼)
+  const switchNowTotal = nw * term + upfront;
+  const savingsNow = stayTotal - switchNowTotal;
+  const monthlySavingsNow = savingsNow / term;
+  const monthlyDiff = cur - nw;
+
+  let paybackMonths;                               // null = 회수 불가
+  if (upfront <= 0) paybackMonths = 0;
+  else if (monthlyDiff <= 0) paybackMonths = null;
+  else paybackMonths = Math.ceil(upfront / monthlyDiff);
+
+  // 남은 약정을 채운 뒤 갈아타면 위약금이 없다고 가정(같은 비교 기간 안에서)
+  const waitTotal = cur * rem + nw * (term - rem) + inst - ben;
+  const savingsWait = stayTotal - waitTotal;
+
+  const options = [
+    { key: 'stay', total: stayTotal },
+    { key: 'now', total: switchNowTotal },
+    ...(rem > 0 ? [{ key: 'wait', total: waitTotal }] : []),
+  ];
+  const best = options.reduce((a, b) => (b.total < a.total ? b : a)).key;
+
+  return {
+    term, remainingMonths: rem,
+    stayTotal: wonRound(stayTotal),
+    switchNowTotal: wonRound(switchNowTotal),
+    waitTotal: wonRound(waitTotal),
+    upfront: wonRound(upfront),
+    savingsNow: wonRound(savingsNow),
+    monthlySavingsNow: wonRound(monthlySavingsNow),
+    savingsWait: wonRound(savingsWait),
+    monthlyDiff: wonRound(monthlyDiff),
+    paybackMonths,
+    paybackWithinTerm: paybackMonths !== null && paybackMonths <= term,
+    best,
+  };
+}
