@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>인터넷 약정 만료일 계산기 — 생활계산서</title>
+<meta name="description" content="가입일과 약정 기간(1·2·3년)만 넣으면 인터넷·TV 약정 만료일, 남은 날짜, 만료 뒤 같은 요금을 계속 냈을 때의 차액을 바로 계산합니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://biojuho.github.io/life-calculator/tools/internet-contract/">
+<meta property="og:title" content="인터넷 약정 만료일 계산기 — 생활계산서">
+<meta property="og:description" content="가입일과 약정 기간(1·2·3년)만 넣으면 인터넷·TV 약정 만료일, 남은 날짜, 만료 뒤 같은 요금을 계속 냈을 때의 차액을 바로 계산합니다.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f3efe6">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../css/style.css">
+
+<script src="/life-calculator/js/track.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"인터넷 약정 만료일은 어디서 확인하나요?","acceptedAnswer":{"@type":"Answer","text":"통신사 앱의 '가입 정보·약정 정보' 메뉴나 고객센터에서 확인할 수 있습니다. 이 계산기는 가입(개통)일 기준 추정치이며, 통신사 기준일과 하루 이틀 다를 수 있습니다."}},{"@type":"Question","name":"약정이 끝나면 요금이 자동으로 내려가나요?","acceptedAnswer":{"@type":"Answer","text":"보통은 그대로입니다. 약정이 끝나도 별도로 재약정이나 변경을 하지 않으면 같은 요금이 계속 청구되는 경우가 많으니, 만료 60일 전쯤 선택지를 비교해 두는 것이 좋습니다."}},{"@type":"Question","name":"만료 전에 바꾸면 손해인가요?","acceptedAnswer":{"@type":"Answer","text":"남은 기간에 따라 위약금(할인 반환금)이 생길 수 있습니다. 위약금까지 넣은 총비용은 인터넷 요금 비교 계산기에서 확인하세요."}}]}</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap hbar">
+    <a class="brand" href="../../">
+      <span class="seal">計</span>
+      <span><strong>생활계산서</strong><small>바로 쓰는 생활 계산기</small></span>
+    </a>
+    <nav class="top">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+      <a href="../../tools/internet/">인터넷 요금</a>
+      <a href="../../tools/internet-contract/" aria-current="page">약정 만료일</a>
+    </nav>
+    <button class="hamb" type="button" aria-expanded="false" aria-controls="mnav">메뉴</button>
+  </div>
+  <div class="wrap"><nav class="drawer" id="mnav">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+      <a href="../../tools/internet/">인터넷 요금</a>
+      <a href="../../tools/internet-contract/" aria-current="page">약정 만료일</a>
+  </nav></div>
+</header>
+<main class="wrap layout">
+  <article class="panel">
+    <p class="crumbs"><a href="../../">생활계산서</a> · 인터넷 약정 만료일</p>
+    <h1>인터넷 약정 만료일</h1>
+    <p class="desc">가입일과 약정 기간(1·2·3년)만 넣으면 인터넷·TV 약정 만료일, 남은 날짜, 만료 뒤 같은 요금을 계속 냈을 때의 차액을 바로 계산합니다.</p>
+    <form id="f">
+  <div class="row">
+    <div><label for="start">가입(개통)일</label><input id="start" type="date" required></div>
+    <div><label for="months">약정 기간</label><select id="months"><option value="12">1년 (12개월)</option><option value="24">2년 (24개월)</option><option value="36" selected>3년 (36개월)</option></select></div>
+  </div>
+  <div class="row">
+    <div><label for="now">지금 내는 월요금 (선택)</label><input id="now" inputmode="numeric" data-won placeholder="예: 38,500"></div>
+    <div><label for="new">새로 알아본 월요금 (선택)</label><input id="new" inputmode="numeric" data-won placeholder="예: 27,500"></div>
+  </div>
+  <div class="actions"><button type="submit">만료일 계산</button></div>
+</form>
+    <div class="out" id="out" hidden></div>
+    <div class="box" id="next" hidden style="margin-top:14px" data-campaign="internal_internet_contract">
+      <p class="sub" id="nextMsg"></p>
+      <p style="margin-top:8px"><a id="nextLink" href="../internet/?utm_source=lc&amp;utm_medium=internal&amp;utm_campaign=internet_contract">위약금까지 넣은 3년 총비용 비교하기 →</a></p>
+      <p class="fine" style="margin-top:8px">광고·제휴 안내: 연결되는 인터넷 요금 비교 페이지에는 디비센스 제휴 상담 버튼이 있습니다. 그 버튼을 통한 상담 신청 시 운영자는 제휴 수수료를 받을 수 있습니다. 이 페이지에는 제휴 링크가 없습니다.</p>
+    </div>
+    <p class="note" id="note"></p>
+    <h2 style="margin-top:22px">자주 묻는 질문</h2>
+    <details><summary>인터넷 약정 만료일은 어디서 확인하나요?</summary><p>통신사 앱의 '가입 정보·약정 정보' 메뉴나 고객센터에서 확인할 수 있습니다. 이 계산기는 가입(개통)일 기준 추정치이며, 통신사 기준일과 하루 이틀 다를 수 있습니다.</p></details><details><summary>약정이 끝나면 요금이 자동으로 내려가나요?</summary><p>보통은 그대로입니다. 약정이 끝나도 별도로 재약정이나 변경을 하지 않으면 같은 요금이 계속 청구되는 경우가 많으니, 만료 60일 전쯤 선택지를 비교해 두는 것이 좋습니다.</p></details><details><summary>만료 전에 바꾸면 손해인가요?</summary><p>남은 기간에 따라 위약금(할인 반환금)이 생길 수 있습니다. 위약금까지 넣은 총비용은 인터넷 요금 비교 계산기에서 확인하세요.</p></details>
+    <p class="source" id="source"></p>
+  </article>
+  <aside>
+    <div class="box">
+      <p class="pill">브라우저에서만 계산</p>
+      <p class="fine" style="margin-top:10px">입력값은 서버로 전송되지 않습니다. 만료일은 가입일 기준 추정이며, 정확한 날짜는 통신사 앱에서 확인하세요.</p>
+    </div>
+  </aside>
+</main>
+
+<footer class="site"><div class="wrap">
+  <p><strong>생활계산서</strong> · 계산 결과는 참고용입니다. 고지서, 홈택스, 근로계약, 대출 약정과 다를 수 있습니다.</p>
+  <p class="fine">2026년 공개 요율을 반영했습니다. 요율이 바뀌면 고지서나 공식 안내가 우선합니다. 개인정보는 서버에 보내지 않고 브라우저에서만 계산합니다. 개인을 식별하지 않는 방문 통계(페이지 조회·계산 실행·버튼 클릭 수)만 수집하며, 쿠키·IP·입력값은 저장하지 않습니다.</p>
+  <p class="fine">GitHub Pages로 배포하는 정적 사이트입니다.</p>
+</div></footer>
+<script>
+document.querySelector('.hamb')?.addEventListener('click', (e)=>{
+  const d=document.getElementById('mnav');
+  d.classList.toggle('open');
+  e.currentTarget.setAttribute('aria-expanded', d.classList.contains('open')?'true':'false');
+});
+</script>
+<script type="module">
+import { contractStatus } from '../../js/contract.mjs';
+import { todaySeoulISO } from '../../js/calc.mjs';
+import { $, num, won, bindWonInputs } from '../../js/ui.js';
+bindWonInputs();
+$('#note').textContent='만료일 = 가입(개통)일 + 약정 개월 − 1일로 계산합니다. 통신사마다 기준일(개통일·설치일)과 말일 처리가 다를 수 있습니다. 날짜는 Asia/Seoul(UTC+9) 달력 기준입니다.';
+$('#source').textContent='근거: 그레고리력 날짜 계산. 월 차액은 입력하신 두 요금의 차이이며 실제 요금·혜택은 통신사 안내가 우선합니다.';
+const msgs={before:'가입일이 오늘보다 뒤입니다. 날짜를 확인해 주세요.',running:'아직 약정 중입니다. 만료 60일 전쯤 다시 비교해 보세요.',soon:'만료가 60일 안으로 다가왔습니다. 지금이 재약정·변경을 비교하기 좋은 때입니다.',expired:'약정이 이미 끝났습니다. 그대로 두면 같은 요금이 계속 나갈 수 있습니다.'};
+function run(e){ e?.preventDefault();
+  const start=$('#start').value; if(!start) return;
+  let r; try{ r=contractStatus({start, months:+$('#months').value, today:todaySeoulISO(), monthlyNow:num($('#now')), monthlyNew:num($('#new'))}); }catch(err){ const o=$('#out'); o.hidden=false; o.textContent=err.message; return; }
+  const label=r.daysLeft===0?'D-Day':r.daysLeft>0?'D-'+r.daysLeft:'만료 후 '+(-r.daysLeft)+'일';
+  let extra='';
+  if(r.monthlyGap!==null){
+    extra = r.monthlyGap>0 ? `<p class="sub">입력하신 두 요금의 월 차액: <strong>${won(r.monthlyGap)}</strong> (1년 ${won(r.monthlyGap*12)})</p>` : `<p class="sub">새 요금이 지금 요금보다 낮지 않습니다.</p>`;
+    if(r.stage==='expired' && r.paidExtraEstimate>0) extra+=`<p class="sub">만료 뒤 약 ${r.expiredMonths}개월 동안 차액만큼 더 냈다면 약 <strong>${won(r.paidExtraEstimate)}</strong>입니다(추정).</p>`;
+  }
+  const o=$('#out'); o.hidden=false;
+  o.innerHTML=`<p class="sub">${start} 가입 · ${$('#months').value}개월 약정</p><p class="big">${r.end}</p><p class="sub">${label} · 약정 진행 ${r.pct}%</p><p class="sub">${msgs[r.stage]}</p>${extra}`;
+  const show = r.stage==='soon'||r.stage==='expired';
+  $('#next').hidden=!show;
+  if(show) $('#nextMsg').textContent = r.stage==='expired' ? '약정이 끝났다면, 유지·재약정·변경 세 가지의 3년 총비용을 한 번에 비교해 보세요.' : '만료 전이라면 남은 위약금까지 넣어서 지금 바꾸는 게 이득인지 비교해 보세요.';
+}
+$('#f').addEventListener('submit',run);
+</script>
+</body>
+</html>
