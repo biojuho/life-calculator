@@ -40,7 +40,7 @@ test('잘못된 입력은 오류', () => {
 import { readFileSync } from 'node:fs';
 test('약정 만료일 페이지: 대가성 안내·캠페인 표시·내부 링크·통계 스크립트', () => {
   const h = readFileSync(new URL('../tools/internet-contract/index.html', import.meta.url), 'utf8');
-  assert.match(h, /제휴 수수료를 받을 수 있습니다/);
+  assert.match(h, /제휴 수수료를 받습니다/);
   assert.match(h, /data-campaign="internal_internet_contract"/);
   assert.match(h, /href="\.\.\/internet\/\?utm_source=lc&amp;utm_medium=internal&amp;utm_campaign=internet_contract"/);
   assert.match(h, /js\/track\.js/);
