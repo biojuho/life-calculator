@@ -90,7 +90,7 @@ export function buildInternetCtaHtml({
   const hint = (diagnosis && diagnosis.ctaHint) || cta.consultOnly || '상담만 요청, 가입은 나중에';
   const weakClass = warn ? ' is-weak' : '';
   const btn = live
-    ? `<a class="btn cta-go${weakClass}" href="${esc(cta.url)}" target="_blank" rel="sponsored noopener">${esc(label)}</a>`
+    ? `<a class="btn cta-go${weakClass}" href="${esc(cta.url)}" target="_blank" rel="sponsored noopener"${cta.campaignId ? ` data-campaign="${esc(cta.campaignId)}"` : ''}>${esc(label)}</a>`
     : `<span class="btn cta-go${weakClass}" aria-disabled="true">준비 중</span>`;
   const caption = cta.heroCaption || '이미지는 AI로 만든 예시입니다';
 
