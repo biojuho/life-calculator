@@ -12,6 +12,7 @@ export const CTA = {
     campaign: '인터넷 비교원',
     partner: '디비센스',
     url: 'https://l7nopd392j.sens.kr',
+    campaignId: 'dbsense_internet_l7no', // 통계 cta_click에 붙는 캠페인 ID (개인정보 아님)
     enabled: true,
     label: '상담 받고 절약액 확인하기',
     weakLabel: '만료 달력만 받아 두기',
