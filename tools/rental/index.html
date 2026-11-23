@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>렌탈 vs 구매 총비용 계산기 — 생활계산서</title>
+<meta name="description" content="정수기·공기청정기·비데 렌탈료를 의무 사용 기간 전체로 더하고, 카드 할인·혜택을 뺀 실제 총비용을 일시불 구매와 비교합니다. 몇 개월째부터 구매가 더 싸지는지도 보여 줍니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://biojuho.github.io/life-calculator/tools/rental/">
+<meta property="og:title" content="렌탈 vs 구매 총비용 계산기 — 생활계산서">
+<meta property="og:description" content="정수기·공기청정기·비데 렌탈료를 의무 사용 기간 전체로 더하고, 카드 할인·혜택을 뺀 실제 총비용을 일시불 구매와 비교합니다. 몇 개월째부터 구매가 더 싸지는지도 보여 줍니다.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f3efe6">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../css/style.css">
+
+<script src="/life-calculator/js/track.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"정수기 렌탈 총비용은 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"월 렌탈료 × 의무 사용 개월 + 등록·설치비 − (월 카드 할인 × 할인 개월) − 현금·사은품 혜택입니다. 카드 할인은 전월 실적 조건이 붙는 경우가 많아, 조건을 못 채우면 할인이 0원이 됩니다."}},{"@type":"Question","name":"렌탈과 일시불 구매 중 뭐가 싸나요?","acceptedAnswer":{"@type":"Answer","text":"기간이 길수록 구매가 유리해지는 경우가 많지만, 구매는 필터 교체·방문 관리 비용이 따로 듭니다. 관리비까지 넣고 비교해야 정확합니다."}},{"@type":"Question","name":"의무 사용 기간 전에 해지하면?","acceptedAnswer":{"@type":"Answer","text":"남은 기간에 따라 위약금과 등록비 반환이 생길 수 있습니다. 금액은 계약서의 해지 조항을 확인하세요."}}]}</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap hbar">
+    <a class="brand" href="../../">
+      <span class="seal">計</span>
+      <span><strong>생활계산서</strong><small>바로 쓰는 생활 계산기</small></span>
+    </a>
+    <nav class="top">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+      <a href="../../tools/internet/">인터넷 요금</a>
+      <a href="../../tools/internet-contract/">약정 만료일</a>
+      <a href="../../tools/rental/" aria-current="page">렌탈 총비용</a>
+    </nav>
+    <button class="hamb" type="button" aria-expanded="false" aria-controls="mnav">메뉴</button>
+  </div>
+  <div class="wrap"><nav class="drawer" id="mnav">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+      <a href="../../tools/internet/">인터넷 요금</a>
+      <a href="../../tools/internet-contract/">약정 만료일</a>
+      <a href="../../tools/rental/" aria-current="page">렌탈 총비용</a>
+  </nav></div>
+</header>
+<main class="wrap layout">
+  <article class="panel">
+    <p class="crumbs"><a href="../../">생활계산서</a> · 렌탈 vs 구매 총비용</p>
+    <h1>렌탈 vs 구매 총비용</h1>
+    <p class="desc">정수기·공기청정기·비데 렌탈료를 의무 사용 기간 전체로 더하고, 카드 할인·혜택을 뺀 실제 총비용을 일시불 구매와 비교합니다. 몇 개월째부터 구매가 더 싸지는지도 보여 줍니다.</p>
+    <form id="f">
+  <h2 style="font-size:1rem;margin:6px 0">렌탈</h2>
+  <div class="row"><div><label for="monthly">월 렌탈료</label><input id="monthly" inputmode="numeric" data-won placeholder="예: 29,900"></div><div><label for="months">의무 사용 기간</label><select id="months"><option value="36">36개월</option><option value="48">48개월</option><option value="60" selected>60개월</option><option value="72">72개월</option></select></div></div>
+  <div class="row"><div><label for="setupFee">등록·설치비 (선택)</label><input id="setupFee" inputmode="numeric" data-won placeholder="예: 0"></div><div><label for="cash">현금·사은품 혜택 (선택)</label><input id="cash" inputmode="numeric" data-won placeholder="예: 0"></div></div>
+  <div class="row"><div><label for="card">제휴카드 월 할인 (선택)</label><input id="card" inputmode="numeric" data-won placeholder="예: 10,000"></div><div><label for="cardMonths">카드 할인 개월</label><input id="cardMonths" inputmode="numeric" placeholder="비우면 전체 기간"></div></div>
+  <h2 style="font-size:1rem;margin:14px 0 6px">일시불 구매 (비교용, 선택)</h2>
+  <div class="row"><div><label for="buy">구매가</label><input id="buy" inputmode="numeric" data-won placeholder="예: 600,000"></div><div><label for="buySetup">구매 설치비</label><input id="buySetup" inputmode="numeric" data-won placeholder="예: 0"></div></div>
+  <div class="row"><div><label for="care">월 관리비(필터·방문)</label><input id="care" inputmode="numeric" data-won placeholder="예: 5,000"></div><div></div></div>
+  <div class="actions"><button type="submit">총비용 계산</button></div>
+</form>
+    <div class="out" id="out" hidden></div>
+    <p class="note" id="note"></p>
+    <h2 style="margin-top:22px">자주 묻는 질문</h2>
+    <details><summary>정수기 렌탈 총비용은 어떻게 계산하나요?</summary><p>월 렌탈료 × 의무 사용 개월 + 등록·설치비 − (월 카드 할인 × 할인 개월) − 현금·사은품 혜택입니다. 카드 할인은 전월 실적 조건이 붙는 경우가 많아, 조건을 못 채우면 할인이 0원이 됩니다.</p></details><details><summary>렌탈과 일시불 구매 중 뭐가 싸나요?</summary><p>기간이 길수록 구매가 유리해지는 경우가 많지만, 구매는 필터 교체·방문 관리 비용이 따로 듭니다. 관리비까지 넣고 비교해야 정확합니다.</p></details><details><summary>의무 사용 기간 전에 해지하면?</summary><p>남은 기간에 따라 위약금과 등록비 반환이 생길 수 있습니다. 금액은 계약서의 해지 조항을 확인하세요.</p></details>
+    <p class="source" id="source"></p>
+  </article>
+  <aside>
+    <div class="box">
+      <p class="pill">브라우저에서만 계산</p>
+      <p class="fine" style="margin-top:10px">입력값은 서버로 전송되지 않습니다. 카드 할인·사은품은 조건이 붙을 수 있으니 계약서가 우선합니다.</p>
+    </div>
+  </aside>
+</main>
+
+<footer class="site"><div class="wrap">
+  <p><strong>생활계산서</strong> · 계산 결과는 참고용입니다. 고지서, 홈택스, 근로계약, 대출 약정과 다를 수 있습니다.</p>
+  <p class="fine">2026년 공개 요율을 반영했습니다. 요율이 바뀌면 고지서나 공식 안내가 우선합니다. 개인정보는 서버에 보내지 않고 브라우저에서만 계산합니다. 개인을 식별하지 않는 방문 통계(페이지 조회·계산 실행·버튼 클릭 수)만 수집하며, 쿠키·IP·입력값은 저장하지 않습니다.</p>
+  <p class="fine">GitHub Pages로 배포하는 정적 사이트입니다.</p>
+</div></footer>
+<script>
+document.querySelector('.hamb')?.addEventListener('click', (e)=>{
+  const d=document.getElementById('mnav');
+  d.classList.toggle('open');
+  e.currentTarget.setAttribute('aria-expanded', d.classList.contains('open')?'true':'false');
+});
+</script>
+<script type="module">
+import { rentalCompare } from '../../js/rental.mjs';
+import { $, num, won, bindWonInputs } from '../../js/ui.js';
+bindWonInputs();
+$('#note').textContent='렌탈 총비용 = 월 렌탈료×의무 개월 + 등록·설치비 − 월 카드 할인×할인 개월 − 현금·사은품 혜택. 구매 총비용 = 구매가 + 설치비 + 월 관리비×같은 기간. 위약금·이자·물가는 넣지 않았습니다.';
+$('#source').textContent='근거: 사칙연산. 카드 할인은 전월 실적 등 조건을 채웠을 때만 적용되며, 실제 금액은 계약서와 카드사 안내가 우선합니다.';
+function run(e){ e?.preventDefault();
+  if(!num($('#monthly'))) return;
+  const cm=$('#cardMonths').value.trim();
+  let r; try{ r=rentalCompare({monthly:num($('#monthly')),months:+$('#months').value,setupFee:num($('#setupFee')),cashBenefit:num($('#cash')),cardDiscount:num($('#card')),cardMonths:cm?Number(cm):undefined,buyPrice:num($('#buy')),buySetup:num($('#buySetup')),buyCare:num($('#care'))}); }catch(err){ const o=$('#out'); o.hidden=false; o.textContent=err.message; return; }
+  let cmp='';
+  if(r.buy!==null){
+    cmp = r.diff>0 ? `<p class="sub">일시불 구매 총비용 ${won(r.buy)} → 렌탈이 <strong>${won(r.diff)}</strong> 더 비쌉니다.</p>` : `<p class="sub">일시불 구매 총비용 ${won(r.buy)} → 렌탈이 <strong>${won(-r.diff)}</strong> 더 쌉니다.</p>`;
+    cmp += r.breakEven ? `<p class="sub">${r.breakEven}개월째부터 구매 쪽 누적 비용이 더 적어집니다.</p>` : `<p class="sub">의무 기간 안에서는 렌탈 누적 비용이 계속 더 적습니다.</p>`;
+  }
+  const o=$('#out'); o.hidden=false;
+  o.innerHTML=`<p class="sub">${r.months}개월 렌탈 실제 총비용</p><p class="big">${won(r.rental)}</p><p class="sub">한 달 평균 ${won(r.rentalMonthly)}</p>${cmp}`;
+}
+$('#f').addEventListener('submit',run);
+</script>
+</body>
+</html>
