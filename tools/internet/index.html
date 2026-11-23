@@ -11,7 +11,7 @@
 <meta property="og:description" content="지금 내는 인터넷·TV 요금과 새 요금제를 약정 기간 총액으로 비교합니다. 위약금과 설치비를 넣으면 월 평균 절감액과 위약금 회수 개월이 나옵니다.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ko_KR">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f3efe6">
 <meta property="og:url" content="https://biojuho.github.io/life-calculator/tools/internet/">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"인터넷 요금 비교 계산기","url":"https://biojuho.github.io/life-calculator/tools/internet/","applicationCategory":"FinanceApplication","operatingSystem":"All","inLanguage":"ko","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"}}</script>
@@ -21,13 +21,69 @@
 <link rel="stylesheet" href="../../css/style.css">
 
 <style>
-.cta{margin-top:18px;border:1px solid var(--rule2);border-radius:14px;padding:14px 16px;background:#fffdf6}
+.diag{margin-top:18px;border:1px solid var(--rule2);border-radius:var(--radius);padding:16px 16px 18px;background:
+  linear-gradient(180deg,#fffef9 0%,#fffdf6 48%,#f7f1e6 100%);box-shadow:0 12px 28px rgba(40,30,16,.07)}
+.diag-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:4px}
+.diag-kicker{margin:0;font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--stamp)}
+.diag-headline{margin:6px 0 0;font-family:var(--serif);font-size:clamp(22px,5.4vw,30px);font-weight:700;letter-spacing:-.03em;line-height:1.3}
+.diag-score{flex:none;min-width:76px;text-align:center;padding:8px 8px 10px;border-radius:14px;background:var(--green-soft)}
+.diag-score.is-warn{background:var(--stamp-soft)}
+.diag-score-num{display:block;font-family:var(--serif);font-size:28px;font-weight:700;color:var(--green);line-height:1}
+.diag-score.is-warn .diag-score-num{color:var(--stamp)}
+.diag-score-unit{font-size:11px;color:var(--ink2)}
+.diag-loss{display:block;margin-top:6px;padding:2px 6px;border-radius:999px;background:#fff;color:var(--stamp);font-size:10px;font-weight:800;line-height:1.3}
+.diag-options{display:grid;grid-template-columns:1fr;gap:8px;margin:14px 0 4px}
+.diag-opt{border:1px solid var(--rule);border-radius:14px;padding:12px;background:#fff}
+.diag-opt.is-best{border-color:#9bb7ad;background:var(--green-soft)}
+.diag-opt-k{margin:0;font-size:11px;font-weight:800;letter-spacing:.04em;color:var(--ink2)}
+.diag-opt-amt{margin:6px 0 0;font-family:var(--serif);font-size:clamp(16px,4.4vw,22px);font-weight:700;letter-spacing:-.03em;line-height:1.2}
+.diag-opt-note{margin:6px 0 0;font-size:11px;color:var(--ink2);line-height:1.45}
+.diag-opt-zero{font-size:13px;font-weight:800;color:var(--stamp)}
+.diag-share{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.diag-share button{font-size:14px}
+.diag-share-status{margin:8px 0 0;font-size:12px;color:var(--green);min-height:1em}
+.diag-share-hint{margin:8px 0 0;font-size:12px;color:var(--ink2);line-height:1.5}
+.diag-fine{margin:8px 0 0;font-size:11px;color:var(--ink2);line-height:1.45}
+.share-canvas{position:absolute;left:-9999px;top:0}
+.cta{container-type:inline-size;margin-top:18px;border:1px solid var(--rule2);border-radius:var(--radius);padding:16px 16px 18px;background:
+  linear-gradient(180deg,#fffef9 0%,#fffdf6 48%,#f7f1e6 100%);box-shadow:0 12px 28px rgba(40,30,16,.07)}
 .cta .aff-label{margin-bottom:8px}
-.cta a.btn,.cta span.btn{display:inline-block;text-decoration:none}
-.cta span.btn{background:var(--rule);color:var(--ink2);cursor:default}
+.cta-hero-wrap{margin:0 0 12px}
+.cta-hero-wrap[hidden]{display:none}
+.cta-hero{display:block;width:100%;height:auto;max-height:240px;object-fit:cover;object-position:center;border-radius:12px;background:var(--paper)}
+.cta-hero-caption{margin:6px 0 0;font-size:11px;color:var(--ink2);text-align:right}
+.cta-headline{margin:0 0 12px;font-family:var(--serif);font-size:clamp(22px,5.4vw,28px);font-weight:700;letter-spacing:-.03em;line-height:1.3}
+.cta-visual{display:grid;gap:16px;margin:0 0 14px}
+.cta-thumb-col{display:none}
+.cta-thumb{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--rule);box-shadow:0 10px 20px rgba(28,23,18,.12);background:#fff}
+.cta-badge-wrap{margin:0;text-align:center}
+.cta-badge{display:inline-block;margin:0;padding:7px 12px;border-radius:999px;background:var(--stamp);color:#fff8f6;font-size:14px;font-weight:800;letter-spacing:-.02em;line-height:1.3;box-shadow:0 6px 14px rgba(179,59,50,.25)}
+.cta-benefit{margin:8px 0 0;font-size:13px;font-weight:700;color:var(--stamp);line-height:1.45}
+.cta-badge-note{margin:4px 0 0;font-size:11px;color:var(--ink2);line-height:1.45}
+.cta-steps{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;position:relative}
+.cta-steps li{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;margin:0;padding:10px 4px;border:1px solid var(--rule);border-radius:12px;background:#fff;font-size:11px;font-weight:700;text-align:center;min-height:86px;line-height:1.3}
+.cta-step-icon{width:24px;height:24px;flex:none;color:var(--green)}
+.cta-legal{margin:2px 0 0;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.7);border:1px dashed var(--rule)}
+.cta .fine{margin:0 0 6px;font-size:13px;color:var(--ink2);line-height:1.55}
+.cta .fine:last-child{margin-bottom:0}
+.cta-disclosure{margin-top:8px!important}
+.cta .cta-go{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;margin-top:14px;padding:16px 18px;font-size:18px;line-height:1.2;border-radius:999px;box-shadow:0 10px 22px rgba(31,79,67,.28)}
+.cta span.cta-go{background:var(--rule);color:var(--ink2);cursor:default;box-shadow:0 6px 14px rgba(40,30,16,.12)}
+.cta a.cta-go.is-weak,.cta span.cta-go.is-weak{box-shadow:0 6px 14px rgba(40,30,16,.12)}
+.cta-consult-only{margin:8px 0 0;font-size:13px;font-weight:700;color:var(--ink2);text-align:center}
 .verdict{display:inline-block;margin:6px 0 10px;padding:4px 10px;border-radius:999px;font-size:14px;font-weight:700;background:var(--green-soft);color:var(--green)}
 .verdict.warn{background:var(--stamp-soft);color:var(--stamp)}
 .hint{font-size:12px;color:var(--ink2);margin:4px 0 0}
+@container (min-width: 520px){
+  .cta-visual{grid-template-columns:200px 1fr;align-items:start;gap:20px}
+  .cta-thumb-col{display:block}
+  .cta-steps{gap:8px}
+  .cta-steps li{min-height:92px;padding:12px 8px;font-size:13px}
+  .cta-hero{max-height:260px}
+}
+@media (min-width: 560px){
+  .diag-options{grid-template-columns:repeat(3,1fr)}
+}
 </style>
 <script src="/life-calculator/js/track.js" defer></script>
 </head>
@@ -80,6 +136,11 @@
     <div><label for="pen">예상 위약금 (원, 선택)</label><input id="pen" type="text" inputmode="numeric" data-won value="120,000"><p class="hint">통신사 앱·고객센터에서 조회한 금액. 모르면 0.</p></div>
     <div></div>
   </div>
+  <p class="pill" style="margin-top:18px">지금 통신사 재약정 (선택)</p>
+  <div class="row">
+    <div><label for="rnw">재약정 시 월 요금 (원, 선택)</label><input id="rnw" type="text" inputmode="numeric" data-won value=""><p class="hint">비워 두면 지금 내는 월 요금과 같다고 보고 비교합니다.</p></div>
+    <div><label for="rgift">재약정 혜택 금액 (원, 선택)</label><input id="rgift" type="text" inputmode="numeric" data-won value=""><p class="hint">아는 금액이 있으면 넣으세요. 비워 두면 혜택을 넣지 않고 안내만 보여 줍니다.</p></div>
+  </div>
   <p class="pill" style="margin-top:18px">새로 알아본 상품</p>
   <div class="row">
     <div><label for="nw">새 요금제 월 요금 (원)</label><input id="nw" type="text" inputmode="numeric" data-won value="27,500"><p class="hint">약정·결합 할인 적용 후 실제 낼 월 금액.</p></div>
@@ -95,6 +156,7 @@
   <div class="actions"><button type="submit">비교하기</button></div>
 </form>
     <div class="out" id="out" hidden></div>
+    <div class="diag" id="diag" hidden></div>
     <div class="cta" id="cta" hidden></div>
     <p class="note" id="note"></p>
     <p class="source" id="source"></p>
@@ -102,7 +164,7 @@
   <aside>
     <div class="box">
       <p class="pill">브라우저에서만 계산</p>
-      <p class="fine" style="margin-top:10px">입력값은 서버로 전송되지 않습니다. 결과를 저장하거나 공유하려면 화면을 직접 남겨 두세요.</p>
+      <p class="fine" style="margin-top:10px">입력값은 서버로 전송되지 않습니다. 결과는 이미지로 저장하거나, 입력값이 담긴 링크를 복사해 공유할 수 있습니다.</p>
     </div>
     <div class="box">
       <p class="pill">갈아타기 전 확인할 것</p>
@@ -132,25 +194,98 @@ document.querySelector('.hamb')?.addEventListener('click', (e)=>{
 <script type="module">
 import { internetSwitch } from '../../js/calc.mjs';
 import { $, num, won, tableRows, bindWonInputs } from '../../js/ui.js';
-import { CTA } from '../../js/cta-config.js';
+import { CTA, isCtaLive, SHARE_PAGE_URL } from '../../js/cta-config.js';
+import { buildInternetCtaHtml, buildDiagnosisHtml, bindCtaHero, bindShareActions, shareCardPayload } from '../../js/cta-internet.js';
+import { diagnoseInternet, threeOptions, buildShareUrl, parseShareSearch } from '../../js/internet-diagnosis.mjs';
 bindWonInputs();
+
+function applyShareQuery(){
+  const parsed=parseShareSearch(location.search);
+  if(!parsed) return;
+  const setWon=(id,v)=>{ if(v==null) return; const el=$(id); if(!el) return; el.value=Math.round(v).toLocaleString('ko-KR'); };
+  const setVal=(id,v)=>{ if(v==null) return; const el=$(id); if(!el) return; el.value=String(v); };
+  setWon('#cur', parsed.currentMonthly);
+  setVal('#rem', parsed.remainingMonths);
+  setWon('#pen', parsed.penalty);
+  setWon('#nw', parsed.newMonthly);
+  if(parsed.newTermMonths!=null){
+    const sel=$('#term');
+    const v=String(parsed.newTermMonths);
+    if([...sel.options].some((o)=>o.value===v)) sel.value=v;
+  }
+  setWon('#ben', parsed.benefit);
+  setWon('#inst', parsed.installFee);
+  if(parsed.renewMonthly!=null) setWon('#rnw', parsed.renewMonthly);
+  if(parsed.renewGiftKnown) setWon('#rgift', parsed.renewGift);
+}
+
+function readInputs(){
+  const termSel=Number($('#term').value);
+  const rnwEl=$('#rnw');
+  const rgiftEl=$('#rgift');
+  const renewRaw=rnwEl && String(rnwEl.value).trim()!=='' ? num(rnwEl) : null;
+  const giftKnown=!!(rgiftEl && String(rgiftEl.value).trim()!=='');
+  return {
+    currentMonthly:num($('#cur')),
+    remainingMonths:Number($('#rem').value)||0,
+    penalty:num($('#pen')),
+    newMonthly:num($('#nw')),
+    newTermMonths:termSel||12,
+    termSelect:termSel,
+    benefit:num($('#ben')),
+    installFee:num($('#inst')),
+    renewMonthly:renewRaw,
+    renewGift:giftKnown ? num(rgiftEl) : null,
+    renewGiftKnown:giftKnown,
+  };
+}
+
 $('#note').textContent='비교 기간은 새 약정 기간입니다. 지금 요금은 그 기간 동안 그대로 낸다고 가정했고, 약정 만료 후 요금 변동, 결합 할인 해지로 늘어나는 휴대폰 요금, 위약금의 일할 계산은 넣지 않았습니다. 실제 금액은 계약서와 통신사 안내가 우선합니다.';
 $('#source').textContent='요금 수치: 내장하지 않음. 모든 금액은 이용자가 입력하며, 기본값은 예시값입니다.';
-const esc=(t)=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function renderCta(){
+
+function renderDiagAndCta(r, inputs){
+  const opts=threeOptions({
+    currentMonthly:inputs.currentMonthly, newMonthly:inputs.newMonthly, term:r.term,
+    penalty:inputs.penalty, installFee:inputs.installFee, benefit:inputs.benefit,
+    renewMonthly:inputs.renewMonthly, renewGift:inputs.renewGift, renewGiftKnown:inputs.renewGiftKnown,
+  });
+  const diagnosis=diagnoseInternet({
+    remainingMonths:r.remainingMonths, stayTotal:r.stayTotal, switchNowTotal:r.switchNowTotal,
+    penalty:inputs.penalty, term:r.term, savingsNow:r.savingsNow,
+  });
+  const shareUrl=buildShareUrl(SHARE_PAGE_URL, {
+    ...inputs, newTermMonths:inputs.termSelect,
+  });
+  const payload=shareCardPayload({ diagnosis, options:opts, shareUrl });
+
+  const diagBox=$('#diag');
+  diagBox.hidden=false;
+  diagBox.innerHTML=buildDiagnosisHtml({ diagnosis, options:opts, term:r.term, won, shareUrl });
+  bindShareActions(diagBox, {
+    payload, shareUrl,
+    onThumb:(dataUrl)=>{
+      const thumb=$('.cta-thumb');
+      if(!thumb) return;
+      thumb.src=dataUrl;
+      thumb.hidden=false;
+    },
+  });
+
   const c=CTA.internet, box=$('#cta');
-  if(!c){box.hidden=true;return;}
+  if(!c){ box.hidden=true; return; }
   box.hidden=false;
-  const live=c.enabled && /^https:\/\//.test(c.url||'');
-  box.innerHTML = live
-    ? `<p class="aff-label">광고 · 제휴 링크${c.partner?' · '+esc(c.partner):''}</p><p class="fine" style="margin:0 0 10px">${esc(c.disclosure)}</p><a class="btn" href="${esc(c.url)}" target="_blank" rel="sponsored noopener">${esc(c.label)}</a>`
-    : `<p class="aff-label">상담 연결 · 준비 중</p><p class="fine" style="margin:0 0 10px">요금 상담 연결은 아직 준비 중입니다. 지금은 계산 결과를 들고 통신사에 직접 문의해 주세요.</p><span class="btn" aria-disabled="true">준비 중</span>`;
+  box.innerHTML=buildInternetCtaHtml({ cta:c, live:isCtaLive(c), diagnosis, won });
+  bindCtaHero(box);
+  if(diagnosis.headline){
+    document.title=diagnosis.headline+' — 생활계산서 인터넷 요금 비교';
+  }
 }
+
 function run(e){ e?.preventDefault();
-  const termSel=Number($('#term').value);
+  const inputs=readInputs();
   const r=internetSwitch({
-    currentMonthly:num($('#cur')), remainingMonths:Number($('#rem').value)||0, penalty:num($('#pen')),
-    newMonthly:num($('#nw')), newTermMonths:termSel||12, benefit:num($('#ben')), installFee:num($('#inst')),
+    currentMonthly:inputs.currentMonthly, remainingMonths:inputs.remainingMonths, penalty:inputs.penalty,
+    newMonthly:inputs.newMonthly, newTermMonths:inputs.newTermMonths, benefit:inputs.benefit, installFee:inputs.installFee,
   });
   const pay = r.paybackMonths===null ? '회수 안 됨 (새 요금이 더 비쌈)' : (r.paybackMonths===0 ? '바로 (혜택이 위약금·설치비보다 큼)' : `${r.paybackMonths}개월`);
   const labels={stay:'지금 상품 유지',now:'지금 갈아타기',wait:'남은 약정 뒤 갈아타기'};
@@ -168,8 +303,9 @@ function run(e){ e?.preventDefault();
    `<p class="sub">월 평균 ${won(Math.abs(r.monthlySavingsNow))} ${r.monthlySavingsNow>=0?'절감':'증가'}</p>`+
    `<p class="verdict${good?'':' warn'}">가장 적게 드는 선택: ${labels[r.best]}</p>`+
    tableRows(['항목','금액'],rows);
-  renderCta();
+  renderDiagAndCta(r, inputs);
 }
+applyShareQuery();
 $('#f').addEventListener('submit',run);
 run({preventDefault(){}});
 </script>
