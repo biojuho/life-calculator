@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>윈터타이어 렌탈 총비용 계산기 — 생활계산서</title>
+<meta name="description" content="윈터타이어 렌탈료를 기간 전체로 더하고, 제휴카드 사용시 할인만 따로 빼 총비용을 봅니다. 렌탈불가 차량이 있으니 상담 전 차종을 확인해 주세요.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://biojuho.github.io/life-calculator/tools/tire-rental/">
+<meta property="og:title" content="윈터타이어 렌탈 총비용 계산기 — 생활계산서">
+<meta property="og:description" content="윈터타이어 렌탈료를 기간 전체로 더하고, 제휴카드 사용시 할인만 따로 빼 총비용을 봅니다. 렌탈불가 차량이 있으니 상담 전 차종을 확인해 주세요.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f3efe6">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../css/style.css">
+
+<script src="/life-calculator/js/track.js" defer></script>
+<script src="../../js/embed-mode.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"렌탈료는 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"월 렌탈료 × 기간 + 등록·장착비에서, 제휴카드 사용시에만 월 할인 × 할인 개월을 뺍니다. 입력 금액은 가상 예시입니다."}},{"@type":"Question","name":"모든 차에 렌탈할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"아닙니다. 렌탈불가 차량이 있으니, 상담 전 차종을 확인해 주세요. 가능 여부는 상담에서 확정됩니다."}},{"@type":"Question","name":"카드 할인은 언제 빼나요?","acceptedAnswer":{"@type":"Answer","text":"‘제휴카드 사용시 할인을 넣었습니다’를 체크한 경우에만 뺍니다. 카드 미사용 시 할인이 없을 수 있으며, 조건은 상담에서 확인합니다."}}]}</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap hbar">
+    <a class="brand" href="../../">
+      <span class="seal">計</span>
+      <span><strong>생활계산서</strong><small>바로 쓰는 생활 계산기</small></span>
+    </a>
+    <nav class="top">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+      <a href="../../tools/internet/">인터넷 요금</a>
+      <a href="../../tools/internet-contract/">약정 만료일</a>
+      <a href="../../tools/rental/">렌탈 총비용</a>
+      <a href="../../tools/car-lease/">장기렌트</a>
+      <a href="../../tools/tutoring/">학원·과외</a>
+      <a href="../../tools/demolition/">철거 가늠</a>
+      <a href="../../tools/tire-rental/" aria-current="page">윈터타이어</a>
+    </nav>
+    <button class="hamb" type="button" aria-expanded="false" aria-controls="mnav">메뉴</button>
+  </div>
+  <div class="wrap"><nav class="drawer" id="mnav">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+      <a href="../../tools/internet/">인터넷 요금</a>
+      <a href="../../tools/internet-contract/">약정 만료일</a>
+      <a href="../../tools/rental/">렌탈 총비용</a>
+      <a href="../../tools/car-lease/">장기렌트</a>
+      <a href="../../tools/tutoring/">학원·과외</a>
+      <a href="../../tools/demolition/">철거 가늠</a>
+      <a href="../../tools/tire-rental/" aria-current="page">윈터타이어</a>
+  </nav></div>
+</header>
+<main class="wrap layout">
+  <article class="panel">
+    <p class="crumbs"><a href="../../">생활계산서</a> · 윈터타이어 렌탈 총비용</p>
+    <h1>윈터타이어 렌탈 총비용</h1>
+    <p class="desc">윈터타이어 렌탈료를 기간 전체로 더하고, 제휴카드 사용시 할인만 따로 빼 총비용을 봅니다. 렌탈불가 차량이 있으니 상담 전 차종을 확인해 주세요.</p>
+    <form id="f">
+  <div class="row"><div><label for="monthly">월 렌탈료 (가상 예시)</label><input id="monthly" inputmode="numeric" data-won placeholder="예: 20,000"></div><div><label for="months">기간</label><select id="months"><option value="12">12개월</option><option value="24">24개월</option><option value="36" selected>36개월</option></select></div></div>
+  <div class="row"><div><label for="setupFee">등록·장착비 (선택)</label><input id="setupFee" inputmode="numeric" data-won placeholder="예: 0"></div><div><label for="card">제휴카드 사용시 월 할인 (선택)</label><input id="card" inputmode="numeric" data-won placeholder="예: 0"></div></div>
+  <div class="row"><div><label for="cardMonths">카드 할인 개월</label><input id="cardMonths" inputmode="numeric" placeholder="비우면 전체 기간"></div><div style="display:flex;align-items:end;padding-bottom:6px"><label><input type="checkbox" id="useCard"> 제휴카드 사용시 할인을 넣었습니다</label></div></div>
+  <div class="actions"><button type="submit">총비용 계산</button></div>
+    </form>
+    <div class="out" id="out" hidden></div>
+    <section class="cta-box cta" id="cta" data-cta data-campaign="dbsense_nexen_winter_hfb9" data-promo-url="https://hfb9veh8mj.sens.kr" data-cta-enabled="false">
+      <!-- 홍보 URL은 data-promo-url에만 보관합니다. 사전검수 통과 전까지 href로 연결하지 않습니다. -->
+      <p class="aff-label">광고 · 제휴 링크 · 디비센스</p>
+      <p class="cta-headline">윈터타이어 렌탈, 기간 총비용으로 비교해 보세요</p>
+      <div class="row" style="margin:8px 0 10px"><div><label for="age">만나이 (상담 대상 확인용, 서버로 보내지 않음)</label><input id="age" inputmode="numeric" placeholder="예: 40"></div><div></div></div>
+      <p class="fine">렌탈불가 차량이 있으니, 상담 전 차종을 확인해 주세요.</p>
+      <p class="fine">만 30세~65세 대상</p>
+      <p class="fine">할인·혜택은 제휴카드 사용시에 해당하며, 조건은 상담에서 확인합니다.</p>
+      <p class="fine">렌탈료·기간·차종 조건은 상담에서 확정됩니다.</p>
+      <p class="fine" id="ctaGate"></p>
+      <p class="fine">이 버튼을 통한 상담 신청 시 운영자는 제휴 수수료를 받을 수 있습니다.</p>
+      <p class="fine">상담만 요청, 계약은 나중에</p>
+      <button type="button" class="cta-go" disabled aria-disabled="true">상담 연결 준비 중</button>
+    </section>
+    <p class="note" id="note"></p>
+    <h2 style="margin-top:22px">자주 묻는 질문</h2>
+    <details><summary>렌탈료는 어떻게 계산하나요?</summary><p>월 렌탈료 × 기간 + 등록·장착비에서, 제휴카드 사용시에만 월 할인 × 할인 개월을 뺍니다. 입력 금액은 가상 예시입니다.</p></details><details><summary>모든 차에 렌탈할 수 있나요?</summary><p>아닙니다. 렌탈불가 차량이 있으니, 상담 전 차종을 확인해 주세요. 가능 여부는 상담에서 확정됩니다.</p></details><details><summary>카드 할인은 언제 빼나요?</summary><p>‘제휴카드 사용시 할인을 넣었습니다’를 체크한 경우에만 뺍니다. 카드 미사용 시 할인이 없을 수 있으며, 조건은 상담에서 확인합니다.</p></details>
+    <p class="source" id="source"></p>
+  </article>
+  <aside>
+    <div class="box">
+      <p class="pill">브라우저에서만 계산</p>
+      <p class="fine" style="margin-top:10px">입력값은 서버로 전송되지 않습니다. 렌탈불가 차량이 있으니 상담 전 차종을 확인해 주세요. 할인·혜택은 제휴카드 사용시에 해당합니다.</p>
+    </div>
+  </aside>
+</main>
+
+<footer class="site"><div class="wrap">
+  <p><strong>생활계산서</strong> · 계산 결과는 참고용입니다. 고지서, 홈택스, 근로계약, 대출 약정과 다를 수 있습니다.</p>
+  <p class="fine">2026년 공개 요율을 반영했습니다. 요율이 바뀌면 고지서나 공식 안내가 우선합니다. 개인정보는 서버에 보내지 않고 브라우저에서만 계산합니다. 개인을 식별하지 않는 방문 통계(페이지 조회·계산 실행·버튼 클릭 수)만 수집하며, 쿠키·IP·입력값은 저장하지 않습니다.</p>
+  <p class="fine">GitHub Pages로 배포하는 정적 사이트입니다.</p>
+</div></footer>
+<script>
+document.querySelector('.hamb')?.addEventListener('click', (e)=>{
+  const d=document.getElementById('mnav');
+  d.classList.toggle('open');
+  e.currentTarget.setAttribute('aria-expanded', d.classList.contains('open')?'true':'false');
+});
+</script>
+<script type="module">
+import { tireRentalCompare, isTireRentalEligible } from '../../js/tire-rental.mjs';
+import { $, num, won, bindWonInputs } from '../../js/ui.js';
+bindWonInputs();
+$('#note').textContent='총비용 = 월 렌탈료×기간 + 등록·장착비 − (제휴카드 사용시 월 할인×할인 개월). 입력 금액은 가상 예시이며 특정 차종·규격의 실제 렌탈료가 아닙니다. 카드 할인은 제휴카드 사용시 체크해야 반영됩니다.';
+$('#source').textContent='근거: 사칙연산. 실제 렌탈료·차종 가능 여부·제휴카드 조건은 상담·계약서가 우선합니다.';
+function gate(){
+  const age=$('#age').value.trim(), el=$('#ctaGate');
+  if(age && !isTireRentalEligible({age:Number(age)})) el.textContent='이 상담은 만 30세~65세가 대상입니다.';
+  else el.textContent='';
+}
+$('#age').addEventListener('input', gate);
+function run(e){ e?.preventDefault();
+  if(!num($('#monthly'))) return;
+  const cm=$('#cardMonths').value.trim();
+  let r; try{ r=tireRentalCompare({monthly:num($('#monthly')),months:+$('#months').value,setupFee:num($('#setupFee')),cardDiscount:num($('#card')),cardMonths:cm?Number(cm):undefined,usePartnerCard:$('#useCard').checked}); }catch(err){ const o=$('#out'); o.hidden=false; o.textContent=err.message; return; }
+  const card = r.cardApplied ? `<p class="sub">제휴카드 사용시 할인을 반영한 참고치입니다. 카드 미사용 시 할인이 없을 수 있습니다.</p>` : (num($('#card')) ? `<p class="sub">제휴카드 사용시 할인을 체크하지 않아, 할인을 넣지 않았습니다.</p>` : '');
+  const o=$('#out'); o.hidden=false;
+  o.innerHTML=`<p class="sub">${r.months}개월 윈터타이어 렌탈 총비용 (가상 예시)</p><p class="big">${won(r.total)}</p><p class="sub">한 달 평균 ${won(r.monthlyAvg)}</p>${card}<p class="sub">렌탈불가 차량이 있으니, 상담 전 차종을 확인해 주세요.</p>`;
+  gate();
+}
+$('#f').addEventListener('submit',run);
+</script>
+</body>
+</html>

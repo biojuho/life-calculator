@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>학원·과외 월비용 비교 계산기 — 생활계산서</title>
+<meta name="description" content="중·고등 학원 수강료와 과외비를 같은 기간의 총액으로 비교합니다. 예시 금액은 가상 예시이며 특정 학원 수강료가 아닙니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://biojuho.github.io/life-calculator/tools/tutoring/">
+<meta property="og:title" content="학원·과외 월비용 비교 계산기 — 생활계산서">
+<meta property="og:description" content="중·고등 학원 수강료와 과외비를 같은 기간의 총액으로 비교합니다. 예시 금액은 가상 예시이며 특정 학원 수강료가 아닙니다.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f3efe6">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../css/style.css">
+
+<script src="/life-calculator/js/track.js" defer></script>
+<script src="../../js/embed-mode.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"과외비는 어떻게 한 달로 환산하나요?","acceptedAnswer":{"@type":"Answer","text":"회당 비용 × 주당 횟수 × 4.3주로 한 달을 가늠합니다. 4.3은 참고값이며, 실제 수업 횟수는 학기·휴강에 따라 달라집니다."}},{"@type":"Question","name":"누구에게 해당하는 체험인가요?","acceptedAnswer":{"@type":"Answer","text":"무료수업 체험 상담은 중1~고2, 서울·경기·인천·부산·울산·양산·김해 거주 학생이 대상입니다. 고3과 사회 과목은 대상이 아닙니다."}},{"@type":"Question","name":"계산 결과가 실제 수강료인가요?","acceptedAnswer":{"@type":"Answer","text":"아닙니다. 이용자가 넣은 금액의 합계이며, 실제 수강료·교재비는 학원이나 선생님 안내가 우선합니다."}}]}</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap hbar">
+    <a class="brand" href="../../">
+      <span class="seal">計</span>
+      <span><strong>생활계산서</strong><small>바로 쓰는 생활 계산기</small></span>
+    </a>
+    <nav class="top">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+      <a href="../../tools/internet/">인터넷 요금</a>
+      <a href="../../tools/internet-contract/">약정 만료일</a>
+      <a href="../../tools/rental/">렌탈 총비용</a>
+      <a href="../../tools/car-lease/">장기렌트</a>
+      <a href="../../tools/tutoring/" aria-current="page">학원·과외</a>
+      <a href="../../tools/demolition/">철거 가늠</a>
+      <a href="../../tools/tire-rental/">윈터타이어</a>
+    </nav>
+    <button class="hamb" type="button" aria-expanded="false" aria-controls="mnav">메뉴</button>
+  </div>
+  <div class="wrap"><nav class="drawer" id="mnav">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+      <a href="../../tools/internet/">인터넷 요금</a>
+      <a href="../../tools/internet-contract/">약정 만료일</a>
+      <a href="../../tools/rental/">렌탈 총비용</a>
+      <a href="../../tools/car-lease/">장기렌트</a>
+      <a href="../../tools/tutoring/" aria-current="page">학원·과외</a>
+      <a href="../../tools/demolition/">철거 가늠</a>
+      <a href="../../tools/tire-rental/">윈터타이어</a>
+  </nav></div>
+</header>
+<main class="wrap layout">
+  <article class="panel">
+    <p class="crumbs"><a href="../../">생활계산서</a> · 학원·과외 월비용</p>
+    <h1>학원·과외 월비용</h1>
+    <p class="desc">중·고등 학원 수강료와 과외비를 같은 기간의 총액으로 비교합니다. 예시 금액은 가상 예시이며 특정 학원 수강료가 아닙니다.</p>
+    <form id="f">
+  <div class="row"><div><label for="months">비교 기간</label><select id="months"><option value="1">1개월</option><option value="3" selected>3개월</option><option value="6">6개월</option><option value="12">12개월</option></select></div><div></div></div>
+  <h2 style="font-size:1rem;margin:14px 0 6px">학원</h2>
+  <div class="row"><div><label for="academyMonthly">월 수강료</label><input id="academyMonthly" inputmode="numeric" data-won placeholder="예: 350,000"></div><div><label for="academyMaterials">교재비 (기간 합계, 선택)</label><input id="academyMaterials" inputmode="numeric" data-won placeholder="예: 50,000"></div></div>
+  <h2 style="font-size:1rem;margin:14px 0 6px">과외</h2>
+  <div class="row"><div><label for="tutorPerSession">회당 비용</label><input id="tutorPerSession" inputmode="numeric" data-won placeholder="예: 40,000"></div><div><label for="sessionsPerWeek">주당 횟수</label><input id="sessionsPerWeek" inputmode="decimal" placeholder="예: 2"></div></div>
+  <div class="row"><div><label for="tutorMaterials">교재비 (기간 합계, 선택)</label><input id="tutorMaterials" inputmode="numeric" data-won placeholder="예: 0"></div><div></div></div>
+  <div class="actions"><button type="submit">총액 비교</button></div>
+    </form>
+    <div class="out" id="out" hidden></div>
+    <section class="cta-box cta" id="cta" data-cta data-campaign="dbsense_ivyedu_hhll" data-promo-url="https://hhllsodpf3.sens.kr" data-cta-enabled="false">
+      <!-- 홍보 URL은 data-promo-url에만 보관합니다. 사전검수 통과 전까지 href로 연결하지 않습니다. -->
+      <p class="aff-label">광고 · 제휴 링크 · 디비센스</p>
+      <p class="cta-headline">중·고등 학원비, 한 달 총액으로 먼저 계산해 보세요</p>
+      <div class="row" style="margin:8px 0 10px"><div><label for="grade">학년</label><select id="grade"><option value="">선택</option><option value="중1">중1</option><option value="중2">중2</option><option value="중3">중3</option><option value="고1">고1</option><option value="고2">고2</option></select></div><div><label for="region">거주지</label><select id="region"><option value="">선택</option><option value="서울">서울</option><option value="경기">경기</option><option value="인천">인천</option><option value="부산">부산</option><option value="울산">울산</option><option value="양산">양산</option><option value="김해">김해</option></select></div></div>
+      <p class="fine">무료수업 체험 상담은 중1~고2, 서울·경기·인천·부산·울산·양산·김해 거주 학생이 대상입니다.</p>
+      <p class="fine">고3과 사회 과목은 대상이 아닙니다.</p>
+      <p class="fine">체험 과목과 일정은 상담에서 확정됩니다.</p>
+      <p class="fine" id="ctaGate"></p>
+      <p class="fine">이 버튼을 통한 상담 신청 시 운영자는 제휴 수수료를 받을 수 있습니다.</p>
+      <p class="fine">상담만 요청, 계약은 나중에</p>
+      <button type="button" class="cta-go" disabled aria-disabled="true">상담 연결 준비 중</button>
+    </section>
+    <p class="note" id="note"></p>
+    <h2 style="margin-top:22px">자주 묻는 질문</h2>
+    <details><summary>과외비는 어떻게 한 달로 환산하나요?</summary><p>회당 비용 × 주당 횟수 × 4.3주로 한 달을 가늠합니다. 4.3은 참고값이며, 실제 수업 횟수는 학기·휴강에 따라 달라집니다.</p></details><details><summary>누구에게 해당하는 체험인가요?</summary><p>무료수업 체험 상담은 중1~고2, 서울·경기·인천·부산·울산·양산·김해 거주 학생이 대상입니다. 고3과 사회 과목은 대상이 아닙니다.</p></details><details><summary>계산 결과가 실제 수강료인가요?</summary><p>아닙니다. 이용자가 넣은 금액의 합계이며, 실제 수강료·교재비는 학원이나 선생님 안내가 우선합니다.</p></details>
+    <p class="source" id="source"></p>
+  </article>
+  <aside>
+    <div class="box">
+      <p class="pill">브라우저에서만 계산</p>
+      <p class="fine" style="margin-top:10px">입력값은 서버로 전송되지 않습니다. 학년·거주지 조건은 상담 대상 확인용이며, 체험 과목과 일정은 상담에서 확정됩니다.</p>
+    </div>
+  </aside>
+</main>
+
+<footer class="site"><div class="wrap">
+  <p><strong>생활계산서</strong> · 계산 결과는 참고용입니다. 고지서, 홈택스, 근로계약, 대출 약정과 다를 수 있습니다.</p>
+  <p class="fine">2026년 공개 요율을 반영했습니다. 요율이 바뀌면 고지서나 공식 안내가 우선합니다. 개인정보는 서버에 보내지 않고 브라우저에서만 계산합니다. 개인을 식별하지 않는 방문 통계(페이지 조회·계산 실행·버튼 클릭 수)만 수집하며, 쿠키·IP·입력값은 저장하지 않습니다.</p>
+  <p class="fine">GitHub Pages로 배포하는 정적 사이트입니다.</p>
+</div></footer>
+<script>
+document.querySelector('.hamb')?.addEventListener('click', (e)=>{
+  const d=document.getElementById('mnav');
+  d.classList.toggle('open');
+  e.currentTarget.setAttribute('aria-expanded', d.classList.contains('open')?'true':'false');
+});
+</script>
+<script type="module">
+import { tutoringCost, isTutoringEligible } from '../../js/tutoring.mjs';
+import { $, num, won, bindWonInputs } from '../../js/ui.js';
+bindWonInputs();
+$('#note').textContent='학원 총액 = 월 수강료×개월 + 교재비. 과외 총액 = 회당 비용×주당 횟수×4.3주×개월 + 교재비. 4.3은 한 달을 주로 환산하는 참고값입니다. 예시 금액은 가상 예시이며 특정 학원 수강료가 아닙니다.';
+$('#source').textContent='근거: 사칙연산. 실제 수강료·횟수는 학원·선생님 안내가 우선합니다.';
+function gate(){
+  const grade=$('#grade').value, region=$('#region').value, el=$('#ctaGate');
+  if(!grade && !region) el.textContent='';
+  else if(!isTutoringEligible({grade, region})) el.textContent='이 체험은 대상 학년·지역만 신청할 수 있어요.';
+  else el.textContent='';
+}
+$('#grade').addEventListener('change', gate);
+$('#region').addEventListener('change', gate);
+function run(e){ e?.preventDefault();
+  if(!num($('#academyMonthly')) && !num($('#tutorPerSession'))) return;
+  let r; try{ r=tutoringCost({months:+$('#months').value,academyMonthly:num($('#academyMonthly')),academyMaterials:num($('#academyMaterials')),tutorPerSession:num($('#tutorPerSession')),sessionsPerWeek:Number(String($('#sessionsPerWeek').value).replace(/,/g,''))||0,tutorMaterials:num($('#tutorMaterials'))}); }catch(err){ const o=$('#out'); o.hidden=false; o.textContent=err.message; return; }
+  const cmp = (num($('#academyMonthly')) && num($('#tutorPerSession')))
+    ? (r.diff>0 ? `<p class="sub">같은 기간 과외 총액 ${won(r.tutor)} (한 달 평균 ${won(r.tutorMonthlyAvg)}) → 학원이 <strong>${won(r.diff)}</strong> 더 많습니다.</p>`
+      : `<p class="sub">같은 기간 과외 총액 ${won(r.tutor)} (한 달 평균 ${won(r.tutorMonthlyAvg)}) → 학원이 <strong>${won(-r.diff)}</strong> 더 적습니다.</p>`)
+    : (num($('#tutorPerSession')) ? `<p class="sub">과외 ${r.months}개월 총액 ${won(r.tutor)} (한 달 평균 ${won(r.tutorMonthlyAvg)})</p>` : '');
+  const o=$('#out'); o.hidden=false;
+  const main = num($('#academyMonthly')) ? `<p class="sub">${r.months}개월 학원 총액</p><p class="big">${won(r.academy)}</p><p class="sub">한 달 평균 ${won(r.academyMonthlyAvg)}</p>` : `<p class="sub">${r.months}개월 과외 총액</p><p class="big">${won(r.tutor)}</p><p class="sub">한 달 평균 ${won(r.tutorMonthlyAvg)}</p>`;
+  o.innerHTML=main+cmp;
+  gate();
+}
+$('#f').addEventListener('submit',run);
+</script>
+</body>
+</html>
