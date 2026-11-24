@@ -127,3 +127,11 @@ pre.code{background:var(--card);border:1px solid var(--rule);border-radius:10px;
 button:disabled, button[aria-disabled="true"], .btn[aria-disabled="true"]{
   opacity:.6;cursor:not-allowed;background:var(--rule);color:var(--ink2);box-shadow:none;
 }
+/* 공유 바 (viral-share-20261124) */
+.share-bar{margin-top:16px;padding:12px 14px;border:1px solid var(--rule2);border-radius:10px;background:rgba(255,255,255,.5)}
+.share-bar .share-q{margin:0 0 8px;font-size:14px;color:var(--ink2)}
+.share-bar .share-btns{display:flex;gap:8px;flex-wrap:wrap}
+.share-bar button{font:inherit;font-size:14px;padding:8px 14px;border-radius:999px;border:1px solid var(--rule2);background:#fff;color:#1f1f1f;cursor:pointer}
+.share-bar button[data-share="kakao"]{background:#FEE500;border-color:#FEE500;color:#191919}
+.share-bar .share-toast{margin:8px 0 0;font-size:13px;color:var(--ink2)}
+html.embed .share-bar{display:none}
