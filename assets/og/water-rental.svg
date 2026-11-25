@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f3efe6"/>
+  <rect width="1200" height="14" fill="#283c32"/>
+  <rect x="90" y="70" width="60" height="60" rx="10" fill="#b03a2e"/>
+  <text x="120" y="114" text-anchor="middle" font-family="Noto Serif CJK KR, Noto Serif, serif" font-size="40" font-weight="700" fill="#fff">計</text>
+  <text x="170" y="114" font-family="Nanum Gothic, Noto Sans CJK KR, sans-serif" font-size="40" font-weight="700" fill="#282828">생활계산서</text>
+  <text x="90" y="250" font-family="Nanum Gothic, Noto Sans CJK KR, sans-serif" font-size="72" font-weight="700" fill="#191919">정수기 렌탈 총비용 계산기</text>
+  <text x="90" y="340" font-family="Nanum Gothic, Noto Sans CJK KR, sans-serif" font-size="40" fill="#505050">바로 쓰는 생활 계산기</text>
+  <text x="90" y="560" font-family="Nanum Gothic, Noto Sans CJK KR, sans-serif" font-size="32" fill="#6e6e6e">2026년 요율 · 무료 · 입력값 저장 안 함</text>
+</svg>
