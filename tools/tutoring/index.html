@@ -158,7 +158,8 @@ function run(e){ e?.preventDefault();
     : (num($('#tutorPerSession')) ? `<p class="sub">과외 ${r.months}개월 총액 ${won(r.tutor)} (한 달 평균 ${won(r.tutorMonthlyAvg)})</p>` : '');
   const o=$('#out'); o.hidden=false;
   const main = num($('#academyMonthly')) ? `<p class="sub">${r.months}개월 학원 총액</p><p class="big">${won(r.academy)}</p><p class="sub">한 달 평균 ${won(r.academyMonthlyAvg)}</p>` : `<p class="sub">${r.months}개월 과외 총액</p><p class="big">${won(r.tutor)}</p><p class="sub">한 달 평균 ${won(r.tutorMonthlyAvg)}</p>`;
-  o.innerHTML=main+cmp;
+  const avg = num($('#academyMonthly')) ? r.academyMonthlyAvg : r.tutorMonthlyAvg;
+  o.innerHTML=main+`<p class="verdict">하루로 치면 약 ${won(Math.round(avg/30))}이에요.</p>`+cmp;
   gate();
 }
 $('#f').addEventListener('submit',run);
