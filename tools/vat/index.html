@@ -128,7 +128,7 @@ function run(e){ e?.preventDefault();
   const amt=num($('#amt'));
   const r=$('#mode').value==='total'?vatFromTotal(amt):vatFromSupply(amt);
   const out=$('#out'); out.hidden=false;
-  out.innerHTML=`<p class="sub">합계 (부가세 포함)</p><p class="big">${won(r.total)}</p>`+
+  out.innerHTML=`<p class="sub">합계 (부가세 포함)</p><p class="big">${won(r.total)}</p><p class="verdict">공급가액 ${won(r.supply)}에 부가세 ${won(r.vat)}가 붙어요.</p>`+
   tableRows(['항목','금액'],[['공급가액',won(r.supply)],['부가세 (10%)',won(r.vat)],['합계',won(r.total)]]);
 }
 $('#f').addEventListener('submit',run);
