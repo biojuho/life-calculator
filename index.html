@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>생활계산서 — 연봉·전기요금·퇴직금 계산기</title>
-<meta name="description" content="2026년 요율로 연봉 실수령액, 주택용 전기요금, 퇴직금, 대출 이자, 부가세, 인터넷 요금 비교, 평수 변환, 글자수, D-day를 계산합니다.">
+<meta name="description" content="2026년 요율로 연봉 실수령액, 전기요금, 퇴직금, 대출 이자, 인터넷 요금 비교, 정수기 렌탈 총비용, 이사 평수를 무료로 계산합니다. 계산식과 출처를 공개합니다.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://biojuho.github.io/life-calculator/">
 <meta property="og:title" content="생활계산서 — 연봉·전기요금·퇴직금 계산기">
@@ -19,13 +19,15 @@
 <meta name="twitter:image" content="https://biojuho.github.io/life-calculator/assets/og/home.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f3efe6">
+<link rel="icon" href="/life-calculator/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
 <link rel="stylesheet" href="css/style.css">
 
 <script src="/life-calculator/js/track.js" defer></script>
 <script src="/life-calculator/js/share.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://biojuho.github.io/life-calculator/#site","name":"생활계산서","url":"https://biojuho.github.io/life-calculator/","inLanguage":"ko","publisher":{"@id":"https://biojuho.github.io/life-calculator/#org"}},{"@type":"Organization","@id":"https://biojuho.github.io/life-calculator/#org","name":"쥬라프","url":"https://biojuho.github.io/life-calculator/about/","email":"biojuho@gmail.com","taxID":"266-31-02086"},{"@type":"ItemList","name":"생활계산서 계산기 목록","itemListElement":[{"@type":"ListItem","position":1,"name":"인터넷 요금 비교","url":"https://biojuho.github.io/life-calculator/tools/internet/"},{"@type":"ListItem","position":2,"name":"인터넷 약정 만료일","url":"https://biojuho.github.io/life-calculator/tools/internet-contract/"},{"@type":"ListItem","position":3,"name":"정수기 렌탈 총비용","url":"https://biojuho.github.io/life-calculator/tools/water-rental/"},{"@type":"ListItem","position":4,"name":"렌탈 vs 구매 총비용","url":"https://biojuho.github.io/life-calculator/tools/rental/"},{"@type":"ListItem","position":5,"name":"장기렌트 vs 할부 총비용","url":"https://biojuho.github.io/life-calculator/tools/car-lease/"},{"@type":"ListItem","position":6,"name":"학원·과외 월비용","url":"https://biojuho.github.io/life-calculator/tools/tutoring/"},{"@type":"ListItem","position":7,"name":"윈터타이어 렌탈 총비용","url":"https://biojuho.github.io/life-calculator/tools/tire-rental/"},{"@type":"ListItem","position":8,"name":"이사 준비·평수","url":"https://biojuho.github.io/life-calculator/tools/moving/"},{"@type":"ListItem","position":9,"name":"평수 ↔ ㎡","url":"https://biojuho.github.io/life-calculator/tools/area/"},{"@type":"ListItem","position":10,"name":"철거 비용 가늠","url":"https://biojuho.github.io/life-calculator/tools/demolition/"},{"@type":"ListItem","position":11,"name":"연봉 실수령액","url":"https://biojuho.github.io/life-calculator/tools/salary/"},{"@type":"ListItem","position":12,"name":"퇴직금","url":"https://biojuho.github.io/life-calculator/tools/severance/"},{"@type":"ListItem","position":13,"name":"대출 이자","url":"https://biojuho.github.io/life-calculator/tools/loan/"},{"@type":"ListItem","position":14,"name":"부가세","url":"https://biojuho.github.io/life-calculator/tools/vat/"},{"@type":"ListItem","position":15,"name":"전기요금 누진","url":"https://biojuho.github.io/life-calculator/tools/electricity/"},{"@type":"ListItem","position":16,"name":"글자수 세기","url":"https://biojuho.github.io/life-calculator/tools/counter/"},{"@type":"ListItem","position":17,"name":"D-day","url":"https://biojuho.github.io/life-calculator/tools/dday/"}]}]}</script>
 </head>
 <body>
 <header class="site">
@@ -82,36 +84,33 @@
     <p class="stamp-note">2026년 요율 기준 · 가입 없이 사용</p>
     <h1>숫자만 넣으면<br>바로 나오는 생활 계산기</h1>
     <p class="lead">연봉 실수령액, 전기요금, 퇴직금, 대출 이자처럼 자주 찾는 계산을 한곳에 모았습니다. 개인정보는 이 기기를 떠나지 않습니다.</p>
+    <p class="trust-strip"><span>2026-11-25 검토</span><span>무료 이용</span><span>입력값은 서버로 보내지 않음</span><a href="/life-calculator/methodology/#principles">계산 기준·출처</a></p>
   </section>
-  <section class="grid"><a class="card" href="tools/salary/"><span class="k">계산기</span><h2>연봉 실수령액</h2><p>4대보험과 간이세액표로 월 실수령액을 계산합니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/loan/"><span class="k">계산기</span><h2>대출 이자</h2><p>원리금균등·원금균등 상환 스케줄을 봅니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/severance/"><span class="k">계산기</span><h2>퇴직금</h2><p>평균임금과 재직 일수로 법정 퇴직금을 계산합니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/counter/"><span class="k">계산기</span><h2>글자수 세기</h2><p>공백·줄·UTF-8 바이트까지 바로 셉니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/area/"><span class="k">계산기</span><h2>평수 ↔ ㎡</h2><p>1평 = 400/121㎡로 정확하게 바꿉니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/moving/"><span class="k">계산기</span><h2>이사 준비·평수</h2><p>전용면적을 평으로 바꾸고, 이사일과 받아 둔 견적 합계를 정리합니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/dday/"><span class="k">계산기</span><h2>D-day</h2><p>남은 날과 지난 날을 D-N, D+N으로 셉니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/electricity/"><span class="k">계산기</span><h2>전기요금 누진</h2><p>주택용 누진제·기후환경요금·연료비를 포함합니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/vat/"><span class="k">계산기</span><h2>부가세</h2><p>공급가액, 부가세 10%, 합계를 서로 환산합니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/internet/"><span class="k">계산기</span><h2>인터넷 요금 비교</h2><p>위약금을 내고 갈아타면 약정 기간 동안 얼마가 남는지 비교합니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/internet-contract/"><span class="k">계산기</span><h2>인터넷 약정 만료일</h2><p>가입일과 약정 기간으로 만료일과 남은 날을 바로 봅니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/rental/"><span class="k">계산기</span><h2>렌탈 vs 구매 총비용</h2><p>정수기·가전 렌탈료를 기간 전체로 더해 구매와 비교합니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/water-rental/"><span class="k">계산기</span><h2>정수기 렌탈 총비용</h2><p>월 렌탈료와 의무기간, 설치비, 기존 계약 위약금으로 총비용을 계산합니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/car-lease/"><span class="k">계산기</span><h2>장기렌트 vs 할부 총비용</h2><p>렌트 월 납입과 할부 원리금을 같은 기간의 총비용으로 비교합니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/tutoring/"><span class="k">계산기</span><h2>학원·과외 월비용</h2><p>중·고등 학원 수강료와 과외비를 같은 기간 총액으로 비교합니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/demolition/"><span class="k">계산기</span><h2>철거 비용 가늠</h2><p>평수와 가늠 단가로 철거 비용의 참고 범위를 봅니다.</p><span class="go">바로 계산 →</span></a>
-<a class="card" href="tools/tire-rental/"><span class="k">계산기</span><h2>윈터타이어 렌탈 총비용</h2><p>윈터타이어 렌탈료를 기간 전체로 더하고, 제휴카드 사용시 할인을 빼 봅니다.</p><span class="go">바로 계산 →</span></a>
-</section>
+  <section class="related" aria-label="많이 찾는 계산"><h2>많이 찾는 계산</h2><ul><li><a class="quick" href="/life-calculator/tools/internet/"><strong>인터넷 요금 비교</strong><span>위약금 내고 갈아타면 얼마 남나</span></a></li><li><a class="quick" href="/life-calculator/tools/moving/"><strong>이사 준비·평수</strong><span>평수·D-day·견적 합산</span></a></li><li><a class="quick" href="/life-calculator/tools/water-rental/"><strong>정수기 렌탈 총비용</strong><span>의무기간 전체 비용</span></a></li><li><a class="quick" href="/life-calculator/tools/salary/"><strong>연봉 실수령액</strong><span>4대보험·소득세 뺀 월급</span></a></li></ul></section>
+  <section class="cat"><h2 class="cat-h">생활비 절약·비교</h2><div class="grid"><a class="card" href="tools/internet/"><span class="k">계산기</span><h3>인터넷 요금 비교</h3><p>위약금을 내고 갈아타면 약정 기간 동안 얼마가 남는지 비교합니다.</p><span class="go">바로 계산 →</span></a>
+<a class="card" href="tools/internet-contract/"><span class="k">계산기</span><h3>인터넷 약정 만료일</h3><p>가입일과 약정 기간으로 만료일과 남은 날을 바로 봅니다.</p><span class="go">바로 계산 →</span></a>
+<a class="card" href="tools/water-rental/"><span class="k">계산기</span><h3>정수기 렌탈 총비용</h3><p>월 렌탈료와 의무기간, 설치비, 기존 계약 위약금으로 총비용을 계산합니다.</p><span class="go">바로 계산 →</span></a>
+<a class="card" href="tools/rental/"><span class="k">계산기</span><h3>렌탈 vs 구매 총비용</h3><p>정수기·가전 렌탈료를 기간 전체로 더해 구매와 비교합니다.</p><span class="go">바로 계산 →</span></a>
+<a class="card" href="tools/car-lease/"><span class="k">계산기</span><h3>장기렌트 vs 할부 총비용</h3><p>렌트 월 납입과 할부 원리금을 같은 기간의 총비용으로 비교합니다.</p><span class="go">바로 계산 →</span></a>
+<a class="card" href="tools/tutoring/"><span class="k">계산기</span><h3>학원·과외 월비용</h3><p>중·고등 학원 수강료와 과외비를 같은 기간 총액으로 비교합니다.</p><span class="go">바로 계산 →</span></a>
+<a class="card" href="tools/tire-rental/"><span class="k">계산기</span><h3>윈터타이어 렌탈 총비용</h3><p>윈터타이어 렌탈료를 기간 전체로 더하고, 제휴카드 사용시 할인을 빼 봅니다.</p><span class="go">바로 계산 →</span></a></div></section>
+  <section class="cat"><h2 class="cat-h">이사·집</h2><div class="grid"><a class="card" href="tools/moving/"><span class="k">계산기</span><h3>이사 준비·평수</h3><p>전용면적을 평으로 바꾸고, 이사일과 받아 둔 견적 합계를 정리합니다.</p><span class="go">바로 계산 →</span></a>
+<a class="card" href="tools/area/"><span class="k">계산기</span><h3>평수 ↔ ㎡</h3><p>1평 = 400/121㎡로 정확하게 바꿉니다.</p><span class="go">바로 계산 →</span></a>
+<a class="card" href="tools/demolition/"><span class="k">계산기</span><h3>철거 비용 가늠</h3><p>평수와 가늠 단가로 철거 비용의 참고 범위를 봅니다.</p><span class="go">바로 계산 →</span></a></div></section>
+  <section class="cat"><h2 class="cat-h">급여·세금·요금</h2><div class="grid"><a class="card" href="tools/salary/"><span class="k">계산기</span><h3>연봉 실수령액</h3><p>4대보험과 간이세액표로 월 실수령액을 계산합니다.</p><span class="go">바로 계산 →</span></a>
+<a class="card" href="tools/severance/"><span class="k">계산기</span><h3>퇴직금</h3><p>평균임금과 재직 일수로 법정 퇴직금을 계산합니다.</p><span class="go">바로 계산 →</span></a>
+<a class="card" href="tools/loan/"><span class="k">계산기</span><h3>대출 이자</h3><p>원리금균등·원금균등 상환 스케줄을 봅니다.</p><span class="go">바로 계산 →</span></a>
+<a class="card" href="tools/vat/"><span class="k">계산기</span><h3>부가세</h3><p>공급가액, 부가세 10%, 합계를 서로 환산합니다.</p><span class="go">바로 계산 →</span></a>
+<a class="card" href="tools/electricity/"><span class="k">계산기</span><h3>전기요금 누진</h3><p>주택용 누진제·기후환경요금·연료비를 포함합니다.</p><span class="go">바로 계산 →</span></a></div></section>
+  <section class="cat"><h2 class="cat-h">글쓰기·날짜</h2><div class="grid"><a class="card" href="tools/counter/"><span class="k">계산기</span><h3>글자수 세기</h3><p>공백·줄·UTF-8 바이트까지 바로 셉니다.</p><span class="go">바로 계산 →</span></a>
+<a class="card" href="tools/dday/"><span class="k">계산기</span><h3>D-day</h3><p>남은 날과 지난 날을 D-N, D+N으로 셉니다.</p><span class="go">바로 계산 →</span></a></div></section>
 </main>
-<aside class="wrap" style="padding-bottom:8px">
-  <div class="aff-slot" data-affiliate-slot>
-    <p class="aff-label">제휴 안내 · 자리만 확보</p>
-    <p>관련 상품이나 서비스 소개를 넣을 칸입니다. 지금은 제휴 링크를 연결하지 않았습니다.</p>
-  </div>
-</aside>
 <footer class="site"><div class="wrap">
   <p><strong>생활계산서</strong> · 계산 결과는 참고용입니다. 고지서, 홈택스, 근로계약, 대출 약정과 다를 수 있습니다.</p>
   <p class="fine">2026년 공개 요율을 반영했습니다. 요율이 바뀌면 고지서나 공식 안내가 우선합니다. 개인정보는 서버에 보내지 않고 브라우저에서만 계산합니다. 개인을 식별하지 않는 방문 통계(페이지 조회·계산 실행·버튼 클릭 수)만 수집하며, 쿠키·IP·입력값은 저장하지 않습니다.</p>
-  <p class="fine">GitHub Pages로 배포하는 정적 사이트입니다.</p>
+  <p class="fine foot-disclosure">일부 계산기의 상담 버튼은 광고(제휴) 링크입니다. 버튼을 통해 상담을 신청하면 운영자(쥬라프)는 제휴 수수료를 받을 수 있으며, 계산식과 계산 결과는 제휴 여부와 관계없이 같습니다.</p>
+  <nav class="foot-links" aria-label="사이트 정보"><a href="/life-calculator/about/">운영자 정보</a><a href="/life-calculator/methodology/">계산 기준·출처</a><a href="/life-calculator/privacy/">개인정보처리방침</a><a href="/life-calculator/disclosure/">광고·제휴 안내</a></nav>
+  <p class="fine">운영: 쥬라프 (개인사업자 266-31-02086) · 문의 <a href="mailto:biojuho@gmail.com">biojuho@gmail.com</a> · GitHub Pages로 배포하는 정적 사이트입니다.</p>
 </div></footer>
 <script>
 document.querySelector('.hamb')?.addEventListener('click', (e)=>{
