@@ -19,10 +19,9 @@
 <meta name="twitter:image" content="https://biojuho.github.io/life-calculator/assets/og/internet.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f3efe6">
-<meta property="og:url" content="https://biojuho.github.io/life-calculator/tools/internet/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"인터넷 요금 비교 계산기","url":"https://biojuho.github.io/life-calculator/tools/internet/","applicationCategory":"FinanceApplication","operatingSystem":"All","inLanguage":"ko","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"}}</script>
+<link rel="icon" href="/life-calculator/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
 <link rel="stylesheet" href="../../css/style.css">
 
@@ -94,6 +93,9 @@
 <script src="/life-calculator/js/track.js" defer></script>
 <script src="/life-calculator/js/share.js" defer></script>
 <script src="../../js/embed-mode.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"인터넷 요금 비교 계산기","url":"https://biojuho.github.io/life-calculator/tools/internet/","description":"지금 인터넷·TV 요금 유지, 지금 갈아타기, 남은 약정 뒤 갈아타기 세 가지를 새 약정 기간 총액으로 비교합니다.","applicationCategory":"FinanceApplication","operatingSystem":"All","inLanguage":"ko","isAccessibleForFree":true,"dateModified":"2026-11-25","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"쥬라프","url":"https://biojuho.github.io/life-calculator/about/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"생활계산서","item":"https://biojuho.github.io/life-calculator/"},{"@type":"ListItem","position":2,"name":"인터넷 요금 비교","item":"https://biojuho.github.io/life-calculator/tools/internet/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"위약금은 어디서 확인하나요?","acceptedAnswer":{"@type":"Answer","text":"가입한 통신사 앱이나 고객센터에서 지금 해지할 때의 위약금(할인 반환금)을 조회할 수 있습니다. 남은 약정 기간과 받은 할인에 따라 달라지므로, 해지 전에 정확한 금액을 확인하세요."}},{"@type":"Question","name":"약정이 끝났으면 어떻게 넣나요?","acceptedAnswer":{"@type":"Answer","text":"약정 남은 개월에 0, 예상 위약금에 0을 넣으면 됩니다. 이때는 지금 상품 유지와 지금 갈아타기 두 가지만 비교합니다."}},{"@type":"Question","name":"결합 할인이 있으면 어떻게 하나요?","acceptedAnswer":{"@type":"Answer","text":"휴대폰 결합 할인을 받고 있다면 해지할 때 휴대폰 요금도 오를 수 있습니다. 결합 할인을 뺀 뒤의 실제 월 요금을 비교하거나, 늘어나는 휴대폰 요금을 새 월 요금에 더해 넣으세요."}},{"@type":"Question","name":"계산 결과가 실제 청구액과 같나요?","acceptedAnswer":{"@type":"Answer","text":"아닙니다. 넣은 금액을 사칙연산으로 더한 참고치입니다. 실제 요금·위약금·혜택은 통신사와 계약서가 우선합니다."}}]}</script>
 </head>
 <body>
 <header class="site">
@@ -150,6 +152,7 @@
     <p class="crumbs"><a href="../../">생활계산서</a> · 인터넷 요금 비교</p>
     <h1>인터넷 요금 비교</h1>
     <p class="desc">지금 쓰는 인터넷(+TV)을 계속 쓸 때와, 위약금을 내고 새 요금제로 갈아탈 때의 총액을 새 약정 기간 기준으로 비교합니다.</p>
+    <p class="trust-strip"><span>2026-11-25 검토</span><span>무료 · 가입 없이</span><span>입력값은 서버로 보내지 않음</span><a href="/life-calculator/methodology/#internet">계산 기준·출처</a></p>
     <form id="f">
   <p class="pill">지금 쓰는 상품</p>
   <div class="row">
@@ -183,7 +186,43 @@
     <div class="diag" id="diag" hidden></div>
     <div class="cta" id="cta" hidden></div>
     <p class="note" id="note"></p>
+    <section class="guide" id="guide">
+      <h2>계산 방법</h2>
+      <p>새 약정 기간(예: 36개월)을 같은 비교 기간으로 놓고, 세 가지 선택의 총액을 더해 가장 적게 드는 쪽을 고릅니다. 통신사 공시 요금을 내장하지 않고, 넣은 금액만 씁니다.</p>
+      <ul class="formula">
+        <li><strong>지금 상품 유지</strong> = 지금 월 요금 × 비교 기간</li>
+        <li><strong>지금 갈아타기</strong> = 새 월 요금 × 비교 기간 + 위약금 + 설치비 − 요금 혜택</li>
+        <li><strong>남은 약정 뒤 갈아타기</strong> = 지금 월 요금 × 남은 개월 + 새 월 요금 × (비교 기간 − 남은 개월) + 설치비 − 요금 혜택 (위약금 없음 가정)</li>
+        <li><strong>위약금 회수 기간</strong> = (위약금 + 설치비 − 요금 혜택) ÷ (지금 월 요금 − 새 월 요금), 올림</li>
+      </ul>
+      <h3>이렇게 쓰세요</h3>
+      <ol class="steps">
+        <li>고지서에서 할인 적용 후 월 요금(부가세 포함)과 약정 남은 개월을 확인합니다.</li>
+        <li>통신사 앱·고객센터에서 지금 해지하면 내는 위약금을 조회해 넣습니다.</li>
+        <li>알아본 새 요금제의 월 요금·약정 기간·설치비를 넣고 <strong>비교하기</strong>를 누릅니다.</li>
+        <li>세 가지 총액과 위약금 회수 기간을 보고, 남은 약정이 길면 만료일을 먼저 확인합니다.</li>
+      </ol>
+      <h3>예시: 기본값으로 계산하면</h3>
+      <p class="fine">아래 숫자는 계산 방법을 보여 주는 가상 예시이며 특정 통신사 요금이 아닙니다. 지금 월 38,500원·남은 약정 8개월·위약금 120,000원, 새 요금 월 27,500원·36개월·설치비 36,000원.</p>
+      <div class="tbl-wrap"><table class="example">
+        <thead><tr><th>선택</th><th class="r">36개월 총액</th><th>계산</th></tr></thead>
+        <tbody>
+          <tr><td>지금 상품 유지</td><td class="r">1,386,000원</td><td>38,500 × 36</td></tr>
+          <tr><td>지금 갈아타기</td><td class="r">1,146,000원</td><td>27,500 × 36 + 120,000 + 36,000</td></tr>
+          <tr><td>남은 8개월 뒤 갈아타기</td><td class="r">1,114,000원</td><td>38,500 × 8 + 27,500 × 28 + 36,000</td></tr>
+        </tbody>
+      </table></div>
+      <p class="fine">이 예시에서는 남은 약정을 채운 뒤 갈아타는 쪽이 가장 적게 들고, 지금 갈아타면 위약금·설치비 156,000원을 월 11,000원 차이로 15개월에 걸쳐 회수합니다.</p>
+      <h3>확인할 곳</h3>
+      <p class="fine">통신 요금제 비교는 스마트초이스(통신요금 정보포털), 해지·위약금 분쟁 상담은 1372 소비자상담센터 또는 한국소비자원에서 할 수 있습니다. 공식 사이트 주소는 <a href="/life-calculator/methodology/#internet">계산 기준·출처</a>에 모아 두었습니다.</p>
+    </section>
+    <h2 class="faq-h">자주 묻는 질문</h2>
+    <details><summary>위약금은 어디서 확인하나요?</summary><p>가입한 통신사 앱이나 고객센터에서 지금 해지할 때의 위약금(할인 반환금)을 조회할 수 있습니다. 남은 약정 기간과 받은 할인에 따라 달라지므로, 해지 전에 정확한 금액을 확인하세요.</p></details>
+    <details><summary>약정이 끝났으면 어떻게 넣나요?</summary><p>약정 남은 개월에 0, 예상 위약금에 0을 넣으면 됩니다. 이때는 지금 상품 유지와 지금 갈아타기 두 가지만 비교합니다.</p></details>
+    <details><summary>결합 할인이 있으면 어떻게 하나요?</summary><p>휴대폰 결합 할인을 받고 있다면 해지할 때 휴대폰 요금도 오를 수 있습니다. 결합 할인을 뺀 뒤의 실제 월 요금을 비교하거나, 늘어나는 휴대폰 요금을 새 월 요금에 더해 넣으세요.</p></details>
+    <details><summary>계산 결과가 실제 청구액과 같나요?</summary><p>아닙니다. 넣은 금액을 사칙연산으로 더한 참고치입니다. 실제 요금·위약금·혜택은 통신사와 계약서가 우선합니다.</p></details>
     <p class="source" id="source"></p>
+    <section class="related" aria-label="함께 쓰면 좋은 계산기"><h2>함께 쓰면 좋은 계산기</h2><ul><li><a href="/life-calculator/tools/internet-contract/"><strong>인터넷 약정 만료일</strong><span>만료일과 남은 날 확인</span></a></li><li><a href="/life-calculator/tools/rental/"><strong>렌탈 vs 구매 총비용</strong><span>가전 렌탈료를 총액으로</span></a></li><li><a href="/life-calculator/tools/water-rental/"><strong>정수기 렌탈 총비용</strong><span>의무기간 전체 비용</span></a></li><li><a href="/life-calculator/tools/electricity/"><strong>전기요금 누진</strong><span>주택용 누진 구간 계산</span></a></li></ul></section>
   </article>
   <aside>
     <div class="box">
@@ -197,16 +236,12 @@
   </aside>
 </main>
 
-<aside class="wrap" style="padding-bottom:8px">
-  <div class="aff-slot" data-affiliate-slot>
-    <p class="aff-label">제휴 안내 · 자리만 확보</p>
-    <p>관련 상품이나 서비스 소개를 넣을 칸입니다. 지금은 제휴 링크를 연결하지 않았습니다.</p>
-  </div>
-</aside>
 <footer class="site"><div class="wrap">
   <p><strong>생활계산서</strong> · 계산 결과는 참고용입니다. 고지서, 홈택스, 근로계약, 대출 약정과 다를 수 있습니다.</p>
   <p class="fine">2026년 공개 요율을 반영했습니다. 요율이 바뀌면 고지서나 공식 안내가 우선합니다. 개인정보는 서버에 보내지 않고 브라우저에서만 계산합니다. 개인을 식별하지 않는 방문 통계(페이지 조회·계산 실행·버튼 클릭 수)만 수집하며, 쿠키·IP·입력값은 저장하지 않습니다.</p>
-  <p class="fine">GitHub Pages로 배포하는 정적 사이트입니다.</p>
+  <p class="fine foot-disclosure">일부 계산기의 상담 버튼은 광고(제휴) 링크입니다. 버튼을 통해 상담을 신청하면 운영자(쥬라프)는 제휴 수수료를 받을 수 있으며, 계산식과 계산 결과는 제휴 여부와 관계없이 같습니다.</p>
+  <nav class="foot-links" aria-label="사이트 정보"><a href="/life-calculator/about/">운영자 정보</a><a href="/life-calculator/methodology/">계산 기준·출처</a><a href="/life-calculator/privacy/">개인정보처리방침</a><a href="/life-calculator/disclosure/">광고·제휴 안내</a></nav>
+  <p class="fine">운영: 쥬라프 (개인사업자 266-31-02086) · 문의 <a href="mailto:biojuho@gmail.com">biojuho@gmail.com</a> · GitHub Pages로 배포하는 정적 사이트입니다.</p>
 </div></footer>
 <script>
 document.querySelector('.hamb')?.addEventListener('click', (e)=>{
