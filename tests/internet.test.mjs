@@ -342,7 +342,16 @@ test('페이지: SEO 메타·canonical·모바일 viewport, 금지 문구 없음
   assert.match(html, /<meta name="viewport" content="width=device-width, initial-scale=1">/);
   assert.match(html, /예시값/);
   for (const bad of ['사은품', '현금', '상품권', '최대 지원', '후기']) assert.ok(!html.includes(bad), bad);
-  assert.ok(!/href="https?:\/\/(?!biojuho\.github\.io|cdn\.jsdelivr|fonts\.googleapis|schema\.org)/.test(html), '외부 링크 없음');
+  // 외부 링크는 공식 출처(정부·공공·통신사 공식 사이트)만 허용 (2026-11-25 승인)
+  const official = ['www.smartchoice.or.kr', 'www.ccn.go.kr', 'www.kca.go.kr', 'www.kt.com', 'www.skbroadband.com', 'www.lguplus.com'];
+  const allowed = /^(biojuho\.github\.io|cdn\.jsdelivr\.net|fonts\.googleapis\.com|schema\.org)$/;
+  for (const [, host] of html.matchAll(/href="https?:\/\/([^/"]+)/g)) {
+    assert.ok(allowed.test(host) || official.includes(host), `허용되지 않은 외부 링크: ${host}`);
+  }
+  for (const [tag] of html.matchAll(/<a [^>]*href="https:\/\/(?:www\.)?(?:smartchoice|ccn|kca|kt|skbroadband|lguplus)\.[^"]*"[^>]*>/g)) {
+    assert.match(tag, /rel="noopener"/, '공식 출처 링크는 rel=noopener');
+    assert.ok(!/sponsored/.test(tag), '공식 출처 링크는 제휴 링크가 아님');
+  }
 });
 
 test('홈·sitemap·모든 페이지 메뉴에 인터넷 요금 링크', () => {
