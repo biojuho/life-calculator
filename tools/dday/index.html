@@ -130,7 +130,7 @@ function run(e){ e?.preventDefault();
   const r=dday(b,a);
   const out=$('#out'); out.hidden=false;
   const msg=r.direction===0?'오늘이 목표일입니다.':r.direction<0?`목표일까지 ${r.days}일 남았습니다.`:`목표일로부터 ${r.days}일 지났습니다.`;
-  out.innerHTML=`<p class="sub">${a} → ${b}</p><p class="big">${r.label}</p><p class="sub">${msg}</p>`;
+  out.innerHTML=`<p class="sub">${a} → ${b}</p><p class="big">${r.label}</p><p class="sub verdict">${msg}</p>`;
 }
 $('#today').addEventListener('click',()=>{$('#from').value=todaySeoulISO(); run({preventDefault(){}});});
 $('#f').addEventListener('submit',run);

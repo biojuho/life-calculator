@@ -126,7 +126,7 @@ $('#source').textContent='근거: 유니코드 코드 포인트, UTF-8 인코딩
 function run(e){ e?.preventDefault();
   const r=countText($('#t').value,{ignoreSpaces:$('#ns').checked, ignoreNewlines:$('#nn').checked});
   const out=$('#out'); out.hidden=false;
-  out.innerHTML=`<p class="sub">글자 수</p><p class="big">${r.chars.toLocaleString('ko-KR')}자</p>`+
+  out.innerHTML=`<p class="sub">글자 수</p><p class="big">${r.chars.toLocaleString('ko-KR')}자</p><p class="verdict">200자 원고지 약 ${Math.max(1,Math.ceil(r.chars/200))}매 분량이에요.</p>`+
   tableRows(['항목','값'],[
     ['글자 수 (현재 옵션)',r.chars.toLocaleString('ko-KR')],
     ['공백 제외',r.noSpace.toLocaleString('ko-KR')],

@@ -159,7 +159,7 @@ function run(e){ e?.preventDefault();
       : `<p class="sub">할부 총비용 ${won(r.installment)} (월 납입 약 ${won(r.installmentMonthly)}, 이자 합계 ${won(r.installmentInterest)}) → 렌트가 <strong>${won(-r.diff)}</strong> 더 적습니다.</p>`;
   }
   const o=$('#out'); o.hidden=false;
-  o.innerHTML=`<p class="sub">${r.months}개월 장기렌트·리스 총비용</p><p class="big">${won(r.lease)}</p><p class="sub">한 달 평균 ${won(r.leaseMonthlyAvg)}</p>${cmp}`;
+  o.innerHTML=`<p class="sub">${r.months}개월 장기렌트·리스 총비용</p><p class="big">${won(r.lease)}</p><p class="sub">한 달 평균 ${won(r.leaseMonthlyAvg)}</p><p class="verdict">하루로 치면 약 ${won(Math.round(r.leaseMonthlyAvg/30))}이에요.</p>${cmp}`;
   gate();
 }
 $('#f').addEventListener('submit',run);
