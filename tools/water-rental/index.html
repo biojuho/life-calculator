@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정수기 렌탈 총비용 계산기 — 생활계산서</title>
+<meta name="description" content="월 렌탈료와 의무사용기간, 등록·설치비, 기존 계약 위약금을 더해 정수기 렌탈 총비용과 월 평균을 계산합니다. 기본값은 가상 예시입니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://biojuho.github.io/life-calculator/tools/water-rental/">
+<meta property="og:title" content="정수기 렌탈 총비용 계산기 — 생활계산서">
+<meta property="og:description" content="월 렌탈료와 의무사용기간, 등록·설치비, 기존 계약 위약금을 더해 정수기 렌탈 총비용과 월 평균을 계산합니다. 기본값은 가상 예시입니다.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:url" content="https://biojuho.github.io/life-calculator/tools/water-rental/">
+<meta property="og:image" content="https://biojuho.github.io/life-calculator/assets/og/water-rental.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="정수기 렌탈 총비용 계산기">
+<meta name="twitter:image" content="https://biojuho.github.io/life-calculator/assets/og/water-rental.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f3efe6">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../css/style.css">
+
+<script src="/life-calculator/js/track.js" defer></script>
+<script src="/life-calculator/js/share.js" defer></script>
+<script src="../../js/embed-mode.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"정수기 렌탈 총비용은 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"월 렌탈료 × 의무사용기간(개월) + 등록비·설치비 + 지금 쓰는 정수기 계약의 남은 위약금입니다. 화면의 기본값은 계산 방법을 보여 주는 가상 예시이며 특정 제품 가격이 아닙니다."}},{"@type":"Question","name":"상담은 언제 신청할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"상담 신청은 평일에만 받습니다. 주말·공휴일에는 버튼을 켤 수 없고, 기존 정수기 계약 만료 여부를 확인한 뒤에만 신청할 수 있습니다. 만 30세 이상 고객 대상 상담입니다."}},{"@type":"Question","name":"누가 상담을 진행하나요?","acceptedAnswer":{"@type":"Answer","text":"상담·접수는 햇살대리점에서 진행합니다. 렌탈료·의무사용기간·설치 조건은 상담에서 안내·확정됩니다."}}]}</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap hbar">
+    <a class="brand" href="../../">
+      <span class="seal">計</span>
+      <span><strong>생활계산서</strong><small>바로 쓰는 생활 계산기</small></span>
+    </a>
+    <nav class="top">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/moving/">이사 준비</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+      <a href="../../tools/internet/">인터넷 요금</a>
+      <a href="../../tools/internet-contract/">약정 만료일</a>
+      <a href="../../tools/rental/">렌탈 총비용</a>
+      <a href="../../tools/water-rental/" aria-current="page">정수기 렌탈</a>
+      <a href="../../tools/car-lease/">장기렌트</a>
+      <a href="../../tools/tutoring/">학원·과외</a>
+      <a href="../../tools/demolition/">철거 가늠</a>
+      <a href="../../tools/tire-rental/">윈터타이어</a>
+    </nav>
+    <button class="hamb" type="button" aria-expanded="false" aria-controls="mnav">메뉴</button>
+  </div>
+  <div class="wrap"><nav class="drawer" id="mnav">
+      <a href="../../">처음</a>
+      <a href="../../tools/salary/">연봉 실수령액</a>
+      <a href="../../tools/loan/">대출 이자</a>
+      <a href="../../tools/severance/">퇴직금</a>
+      <a href="../../tools/counter/">글자수 세기</a>
+      <a href="../../tools/area/">평수 ↔ ㎡</a>
+      <a href="../../tools/moving/">이사 준비</a>
+      <a href="../../tools/dday/">D-day</a>
+      <a href="../../tools/electricity/">전기요금 누진</a>
+      <a href="../../tools/vat/">부가세</a>
+      <a href="../../tools/internet/">인터넷 요금</a>
+      <a href="../../tools/internet-contract/">약정 만료일</a>
+      <a href="../../tools/rental/">렌탈 총비용</a>
+      <a href="../../tools/water-rental/" aria-current="page">정수기 렌탈</a>
+      <a href="../../tools/car-lease/">장기렌트</a>
+      <a href="../../tools/tutoring/">학원·과외</a>
+      <a href="../../tools/demolition/">철거 가늠</a>
+      <a href="../../tools/tire-rental/">윈터타이어</a>
+  </nav></div>
+</header>
+<main class="wrap layout">
+  <article class="panel">
+    <p class="crumbs"><a href="../../">생활계산서</a> · 정수기 렌탈 총비용</p>
+    <h1>정수기 렌탈 총비용 계산기</h1>
+    <p class="desc">월 렌탈료만 보지 말고, 의무사용기간 전체 총비용으로 계산해 보세요. 기본값은 계산 방법을 보여 주는 가상 예시이며 특정 제품 가격이 아닙니다.</p>
+    <form id="f">
+      <div class="row">
+        <div><label for="monthly">월 렌탈료</label><input id="monthly" inputmode="numeric" data-won value="19,900"></div>
+        <div><label for="months">의무사용기간</label><select id="months"><option value="36" selected>36개월</option><option value="48">48개월</option><option value="60">60개월</option></select></div>
+      </div>
+      <div class="row">
+        <div><label for="setupFee">등록비·설치비</label><input id="setupFee" inputmode="numeric" data-won value="0"></div>
+        <div><label for="remaining">기존 계약 남은 개월 (선택)</label><input id="remaining" inputmode="numeric" placeholder="예: 0"></div>
+      </div>
+      <div class="row">
+        <div><label for="penalty">기존 계약 예상 위약금 (선택)</label><input id="penalty" inputmode="numeric" data-won placeholder="예: 0"></div>
+        <div></div>
+      </div>
+      <p class="fine">위 숫자는 가상 예시이며 특정 제품 가격이 아닙니다. 렌탈료·의무사용기간·설치 조건은 상담에서 안내·확정됩니다.</p>
+      <div class="actions"><button type="submit">총비용 계산</button></div>
+    </form>
+    <div class="out" id="out" hidden></div>
+    <section class="cta-box cta" id="cta" data-cta data-campaign="dbsense_coway_y184" data-promo-url="https://y184iinoij.sens.kr" data-cta-enabled="true">
+      <p class="aff-label">광고 · 제휴 링크 · 디비센스</p>
+      <p class="cta-headline">정수기 렌탈, 월 렌탈료 말고 총비용으로 정하세요</p>
+      <p class="fine">총비용을 확인했다면, 코웨이 정수기 렌탈 상담을 받아 보세요</p>
+      <p class="fine">· 상담·접수: 햇살대리점 (코웨이 정수기 렌탈 상담)</p>
+      <p class="fine">· 상담 신청은 평일에만 받아요</p>
+      <p class="fine">· 만 30세 이상 고객 대상 상담입니다</p>
+      <p class="fine">· 렌탈료·의무사용기간·설치 조건은 상담에서 안내·확정됩니다</p>
+      <p class="fine" id="penaltyWarn" hidden>지금은 위약금 때문에 총비용이 늘 수 있어요. 만료 시점에 다시 계산해 보세요</p>
+      <p class="fine lock-line">신용불량자 및 미성년자는 신청이 불가합니다</p>
+      <label class="check-line lock-line"><input type="checkbox" id="expiredOk"> 지금 쓰는 정수기 렌탈 계약이 끝났는지(만료일) 확인했어요. 사용 중인 정수기가 없다면 체크해 주세요.</label>
+      <p class="fine" id="ctaGate"></p>
+      <a class="btn cta-go" id="ctaGo" href="https://y184iinoij.sens.kr" target="_blank" rel="sponsored noopener" data-campaign="dbsense_coway_y184">코웨이 정수기 렌탈 상담 신청</a>
+      <p class="fine">이 버튼을 통한 상담 신청 시 운영자(쥬라프)는 제휴 수수료를 받을 수 있습니다.</p>
+      <p class="fine">광고 · 사업자 정보: 상담 진행 햇살대리점</p>
+      <p class="fine">사이트 운영: 쥬라프 (사업자등록번호 266-31-02086)</p>
+    </section>
+    <p class="note" id="note"></p>
+    <h2 style="margin-top:22px">자주 묻는 질문</h2>
+    <details><summary>정수기 렌탈 총비용은 어떻게 계산하나요?</summary><p>월 렌탈료 × 의무사용기간(개월) + 등록비·설치비 + 지금 쓰는 정수기 계약의 남은 위약금입니다. 화면의 기본값은 계산 방법을 보여 주는 가상 예시이며 특정 제품 가격이 아닙니다.</p></details>
+    <details><summary>상담은 언제 신청할 수 있나요?</summary><p>상담 신청은 평일에만 받습니다. 주말·공휴일에는 버튼을 켤 수 없고, 기존 정수기 계약 만료 여부를 확인한 뒤에만 신청할 수 있습니다. 만 30세 이상 고객 대상 상담입니다.</p></details>
+    <details><summary>누가 상담을 진행하나요?</summary><p>상담·접수는 햇살대리점에서 진행합니다. 렌탈료·의무사용기간·설치 조건은 상담에서 안내·확정됩니다.</p></details>
+    <p class="source" id="source"></p>
+  </article>
+  <aside>
+    <div class="box">
+      <p class="pill">브라우저에서만 계산</p>
+      <p class="fine" style="margin-top:10px">입력값은 서버로 전송되지 않습니다. 기본값은 가상 예시이며 특정 제품 가격이 아닙니다. 실제 조건은 상담·계약서가 우선합니다.</p>
+    </div>
+  </aside>
+</main>
+<footer class="site"><div class="wrap">
+  <p><strong>생활계산서</strong> · 계산 결과는 참고용입니다. 고지서, 홈택스, 근로계약, 대출 약정과 다를 수 있습니다.</p>
+  <p class="fine">2026년 공개 요율을 반영했습니다. 요율이 바뀌면 고지서나 공식 안내가 우선합니다. 개인정보는 서버에 보내지 않고 브라우저에서만 계산합니다. 개인을 식별하지 않는 방문 통계(페이지 조회·계산 실행·버튼 클릭 수)만 수집하며, 쿠키·IP·입력값은 저장하지 않습니다.</p>
+  <p class="fine">GitHub Pages로 배포하는 정적 사이트입니다.</p>
+</div></footer>
+<script>
+document.querySelector('.hamb')?.addEventListener('click', (e)=>{
+  const d=document.getElementById('mnav');
+  d.classList.toggle('open');
+  e.currentTarget.setAttribute('aria-expanded', d.classList.contains('open')?'true':'false');
+});
+</script>
+<script type="module">
+import { waterRentalTotal, isCowayConsultOpen } from '../../js/water-rental.mjs';
+import { $, num, won, bindWonInputs } from '../../js/ui.js';
+bindWonInputs();
+$('#note').textContent='의무사용기간 총비용 = 월 렌탈료 × 의무사용기간(개월) + 등록비·설치비 + 지금 쓰는 정수기 계약의 남은 위약금. 기본값은 가상 예시이며 특정 제품 가격이 아닙니다.';
+$('#source').textContent='근거: 사칙연산. 렌탈료·의무사용기간·설치 조건은 상담·계약서가 우선합니다.';
+
+function gate(){
+  const open=isCowayConsultOpen();
+  const checked=$('#expiredOk').checked;
+  const btn=$('#ctaGo');
+  const msg=$('#ctaGate');
+  if(!open){
+    btn.setAttribute('aria-disabled','true');
+    btn.classList.add('is-disabled');
+    btn.addEventListener('click', block, {once:false});
+    btn.textContent='평일에 신청할 수 있어요';
+    msg.textContent='상담 신청은 평일에만 받아요';
+    return;
+  }
+  if(!checked){
+    btn.setAttribute('aria-disabled','true');
+    btn.classList.add('is-disabled');
+    btn.textContent='코웨이 정수기 렌탈 상담 신청';
+    msg.textContent='기존 정수기 계약 만료 여부를 먼저 확인해 주세요';
+    return;
+  }
+  btn.removeAttribute('aria-disabled');
+  btn.classList.remove('is-disabled');
+  btn.textContent='코웨이 정수기 렌탈 상담 신청';
+  msg.textContent='';
+}
+function block(e){ if($('#ctaGo').getAttribute('aria-disabled')==='true'){ e.preventDefault(); } }
+$('#ctaGo').addEventListener('click', block);
+function run(e){
+  e?.preventDefault();
+  if(!num($('#monthly'))) return;
+  let r; try{ r=waterRentalTotal({monthly:num($('#monthly')),months:+$('#months').value,setupFee:num($('#setupFee')),remainingMonths:num($('#remaining')),penalty:num($('#penalty'))}); }catch(err){ const o=$('#out'); o.hidden=false; o.textContent=err.message; return; }
+  let cmp='';
+  if(r.penalty>0){
+    cmp=`<p class="sub">지금 바꾸면 총비용 ${won(r.totalNow)} (위약금 ${won(r.penalty)} 포함). 기존 계약을 끝까지 쓴 뒤 바꾸면 ${won(r.totalLater)}입니다.</p>`;
+  }
+  const o=$('#out'); o.hidden=false;
+  o.innerHTML=`<p class="sub">${r.months}개월 정수기 렌탈 총비용</p><p class="big">${won(r.totalNow)}</p><p class="sub">한 달 평균 ${won(r.monthlyAvg)}</p>${cmp}`;
+  $('#penaltyWarn').hidden=!r.penaltyHigh;
+  gate();
+}
+$('#f').addEventListener('submit',run);
+$('#expiredOk').addEventListener('change',gate);
+gate();
+</script>
+</body>
+</html>
