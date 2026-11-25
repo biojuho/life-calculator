@@ -5,6 +5,7 @@
  * - 공유 주소에는 utm_source=share, utm_medium=<매체>, utm_campaign=<계산기 이름>을 붙입니다.
  * - 결과 이미지 카드: 화면의 결과를 이 기기에서 PNG로 그립니다(서버 전송 없음).
  * - 카카오톡 버튼은 window.LC_KAKAO_KEY(카카오 디벨로퍼스 JavaScript 키)가 있을 때만 보입니다.
+ *   공개용 JavaScript 키 기본값을 이 파일에 둡니다. 페이지에서 먼저 지정하면 그 값을 씁니다.
  * - 클릭은 data-share 속성으로 track.js가 'share' 이벤트로 셉니다. 저장·설치 버튼은 공유로 세지 않도록 .lc-keep 안에 둡니다.
  * - '이 기기에 입력값 기억'은 사용자가 켤 때만 localStorage에 저장하고, 끄면 지웁니다.
  */
@@ -86,6 +87,7 @@
   if (typeof module !== 'undefined' && module.exports) { module.exports = api; return; }
 
   var w = root, d = w.document;
+  if (!w.LC_KAKAO_KEY) w.LC_KAKAO_KEY = 'b9f90aeb0c75e40aee40826f06201bb4';
   if (!d || /(^|[?&])embed=1(&|$)/.test(w.location.search)) return; // 위젯(임베드) 화면에서는 숨김
   var NAME = toolName(w.location.pathname);
   function canonical() { var l = d.querySelector('link[rel="canonical"]'); return (l && l.href) || (w.location.origin + w.location.pathname); }
