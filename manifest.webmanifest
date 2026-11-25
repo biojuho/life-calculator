@@ -1,0 +1,18 @@
+{
+ "name": "생활계산서 — 바로 쓰는 생활 계산기",
+ "short_name": "생활계산서",
+ "lang": "ko",
+ "start_url": "/life-calculator/?utm_source=pwa&utm_medium=homescreen",
+ "scope": "/life-calculator/",
+ "display": "standalone",
+ "background_color": "#f3efe6",
+ "theme_color": "#f3efe6",
+ "icons": [
+  {
+   "src": "/life-calculator/favicon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml",
+   "purpose": "any"
+  }
+ ]
+}
