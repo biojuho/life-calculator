@@ -188,3 +188,19 @@ footer.site a{color:var(--green)}
 .doc p,.doc li{line-height:1.7}
 .hamb{min-height:40px}
 .drawer a{display:inline-block;padding:6px 0}
+
+/* viral-20261125 */
+.share-bar .share-btns a{font-size:14px;padding:8px 14px;border-radius:999px;border:1px solid var(--rule2);background:#fff;color:#1f1f1f;text-decoration:none}
+.share-bar button[data-share="image"]{background:var(--green-soft);border-color:#b9cfc6;color:var(--green);font-weight:700}
+.share-opt,.keep-opt{display:block;margin:10px 0 0;font-size:13.5px;color:var(--ink2);line-height:1.5}
+.share-opt input,.keep-opt input{vertical-align:-2px;margin:0 6px 0 0}
+.share-opt small,.keep-opt small{color:var(--ink2);opacity:.8}
+.share-more{margin-top:8px;font-size:14px}.share-more summary{cursor:pointer;color:var(--green)}.share-more .share-btns{margin-top:8px}
+.lc-keep{margin-top:8px;padding:8px 14px;font-size:13.5px;color:var(--ink2)}
+.lc-keep button,.lc-restore button{font:inherit;font-size:13.5px;padding:6px 12px;border-radius:999px;border:1px solid var(--rule2);background:#fff;color:#1f1f1f;cursor:pointer}
+.lc-install{margin:8px 0 0}
+.share-welcome,.lc-restore{margin:0 0 14px;padding:10px 12px;border-radius:12px;background:var(--green-soft);color:var(--green);font-size:14.5px;font-weight:600}
+.lc-restore{background:#fff;border:1px dashed var(--rule2);color:var(--ink2);font-weight:500}
+.season{margin:18px 0 8px;padding:14px 16px;border:1px solid var(--rule);border-radius:var(--radius);background:var(--card)}
+.season h2{font-family:var(--serif);font-size:20px;margin:0 0 6px}.season ul{margin:6px 0 0;padding-left:18px}.season li{margin:4px 0}
+.kw-table td.r,.kw-table th.r{text-align:right}.kw-table tr.me td{font-weight:800;background:var(--green-soft)}
