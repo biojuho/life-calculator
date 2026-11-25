@@ -19,8 +19,9 @@
 <meta name="twitter:image" content="https://biojuho.github.io/life-calculator/assets/og/moving.svg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f3efe6">
+<link rel="icon" href="/life-calculator/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
 <link rel="stylesheet" href="../../css/style.css">
 
@@ -28,6 +29,8 @@
 <script src="/life-calculator/js/share.js" defer></script>
 <script src="../../js/embed-mode.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"전용 84㎡는 몇 평인가요?","acceptedAnswer":{"@type":"Answer","text":"1평은 400/121㎡(약 3.3058㎡)입니다. 84㎡를 이 값으로 나누면 약 25.4평입니다. 건축물대장·분양 면적 기준과 다를 수 있습니다."}},{"@type":"Question","name":"이 계산기는 이사 가격을 알려 주나요?","acceptedAnswer":{"@type":"Answer","text":"아닙니다. 평수 환산, 이사일까지 남은 날, 이미 받은 견적의 항목 합산만 합니다. 견적 금액은 상담·방문 확인 후 업체가 확정합니다."}},{"@type":"Question","name":"상담은 누구나 신청할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"이사 날짜가 오늘부터 60일 안으로 정해진 투룸 이상 가정이사만 신청할 수 있습니다. 원룸·용달 이사나 날짜가 미정이면 버튼을 보여 주지 않습니다."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"이사 준비·평수 계산기","url":"https://biojuho.github.io/life-calculator/tools/moving/","description":"전용면적을 평으로 바꾸고 이사일까지 남은 날과 받아 둔 견적 최대 3곳의 추가비를 같은 기준으로 합산합니다.","applicationCategory":"FinanceApplication","operatingSystem":"All","inLanguage":"ko","isAccessibleForFree":true,"dateModified":"2026-11-25","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"publisher":{"@type":"Organization","name":"쥬라프","url":"https://biojuho.github.io/life-calculator/about/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"생활계산서","item":"https://biojuho.github.io/life-calculator/"},{"@type":"ListItem","position":2,"name":"이사 준비·평수","item":"https://biojuho.github.io/life-calculator/tools/moving/"}]}</script>
 </head>
 <body>
 <header class="site">
@@ -84,16 +87,17 @@
     <p class="crumbs"><a href="../../">생활계산서</a> · 이사 준비·평수</p>
     <h1>이사 준비·평수 계산기</h1>
     <p class="desc">전용면적을 평으로 바꾸고, 이사일까지 남은 날과 받아 둔 견적(최대 3곳)을 같은 항목으로 합산합니다. 이사 가격을 추정하거나 시세를 보여 주지 않습니다.</p>
+    <p class="trust-strip"><span>2026-11-25 검토</span><span>무료 · 가입 없이</span><span>입력값은 서버로 보내지 않음</span><a href="/life-calculator/methodology/#moving">계산 기준·출처</a></p>
     <form id="f">
       <div class="row">
         <div><label for="m2">전용면적 (㎡)</label><input id="m2" inputmode="decimal" value="84"></div>
         <div><label for="moveDate">이사 예정일</label><input id="moveDate" type="date"></div>
       </div>
       <p class="fine">기본값 84㎡는 계산 방법을 보여 주는 가상 예시입니다.</p>
-      <h2 style="font-size:1rem;margin:14px 0 6px">받아 둔 견적 (최대 3곳, 선택)</h2>
+      <h2 class="form-h">받아 둔 견적 (최대 3곳, 선택)</h2>
       <p class="fine">기본 견적에 사다리차, 에어컨 이전·설치, 폐기물 처리, 엘리베이터 사용료, 기타 추가비를 더해 견적별 총액을 봅니다.</p>
       <div id="quotes"></div>
-      <h2 style="font-size:1rem;margin:14px 0 6px">업체에 알려 줄 정보 체크리스트</h2>
+      <h2 class="form-h">업체에 알려 줄 정보 체크리스트</h2>
       <label class="check-line"><input type="checkbox" id="ckFloor"> 출발·도착 층수</label>
       <label class="check-line"><input type="checkbox" id="ckElev"> 엘리베이터 유무</label>
       <label class="check-line"><input type="checkbox" id="ckItems"> 큰 가전·가구 목록</label>
@@ -126,11 +130,46 @@
       <p class="fine">상담만 신청하고, 계약은 견적을 비교한 뒤 결정하면 됩니다.</p>
     </section>
     <p class="note" id="note"></p>
-    <h2 style="margin-top:22px">자주 묻는 질문</h2>
+    <section class="guide" id="guide">
+      <h2>계산 방법</h2>
+      <p>이 계산기는 이사 가격을 추정하지 않습니다. 평수 환산, 이사일까지 남은 날, 이미 받은 견적의 항목 합산만 합니다.</p>
+      <ul class="formula">
+        <li><strong>평</strong> = 전용면적(㎡) ÷ (400/121), 1평은 약 3.3058㎡</li>
+        <li><strong>견적 총액</strong> = 기본 견적 + 사다리차 + 에어컨 이전·설치 + 폐기물 처리 + 엘리베이터 사용료 + 기타 추가비</li>
+        <li><strong>남은 날</strong> = 이사 예정일 − 오늘(한국 시간 기준)</li>
+      </ul>
+      <h3>이렇게 쓰세요</h3>
+      <ol class="steps">
+        <li>등기부·관리비 고지서에서 전용면적(㎡)을 확인해 넣고 평수를 봅니다.</li>
+        <li>이사 예정일을 넣어 남은 날을 확인합니다.</li>
+        <li>받은 견적서를 보고 기본 견적과 추가비를 업체별로 같은 칸에 나눠 넣습니다.</li>
+        <li>견적별 총액을 같은 기준으로 비교하고, 빠진 항목이 없는지 업체에 다시 확인합니다.</li>
+      </ol>
+      <h3>견적서에서 따로 붙기 쉬운 항목</h3>
+      <div class="tbl-wrap"><table class="example">
+        <thead><tr><th>항목</th><th>견적 받을 때 확인할 것</th></tr></thead>
+        <tbody>
+          <tr><td>사다리차</td><td>출발·도착 층수, 엘리베이터 사용 가능 여부</td></tr>
+          <tr><td>에어컨 이전·설치</td><td>대수, 배관 연장·가스 충전 포함 여부</td></tr>
+          <tr><td>폐기물 처리</td><td>버릴 가구·가전 목록과 처리 방식</td></tr>
+          <tr><td>엘리베이터 사용료</td><td>관리사무소 사용료·예약 필요 여부</td></tr>
+          <tr><td>기타 추가비</td><td>주차 가능 여부, 큰 가전·가구, 보관 이사 여부</td></tr>
+        </tbody>
+      </table></div>
+      <h3>평수 환산 예시</h3>
+      <div class="tbl-wrap"><table class="example">
+        <thead><tr><th>전용면적</th><th class="r">평 (소수 둘째 자리)</th></tr></thead>
+        <tbody><tr><td>59㎡</td><td class="r">17.85평</td></tr><tr><td>84㎡</td><td class="r">25.41평</td></tr><tr><td>114㎡</td><td class="r">34.49평</td></tr></tbody>
+      </table></div>
+      <h3>확인할 곳</h3>
+      <p class="fine">면적 단위는 <a href="https://www.law.go.kr/법령/계량에관한법률" target="_blank" rel="noopener">국가법령정보센터 「계량에 관한 법률」</a>을 따릅니다. 이사 계약·파손 분쟁 상담은 <a href="https://www.ccn.go.kr/" target="_blank" rel="noopener">1372 소비자상담센터</a> 또는 <a href="https://www.kca.go.kr/home/main.do" target="_blank" rel="noopener">한국소비자원</a>에서 할 수 있습니다.</p>
+    </section>
+    <h2 class="faq-h">자주 묻는 질문</h2>
     <details><summary>전용 84㎡는 몇 평인가요?</summary><p>1평은 400/121㎡(약 3.3058㎡)입니다. 84㎡를 이 값으로 나누면 약 25.4평입니다. 건축물대장·분양 면적 기준과 다를 수 있습니다.</p></details>
     <details><summary>이 계산기는 이사 가격을 알려 주나요?</summary><p>아닙니다. 평수 환산, 이사일까지 남은 날, 이미 받은 견적의 항목 합산만 합니다. 견적 금액은 상담·방문 확인 후 업체가 확정합니다.</p></details>
     <details><summary>상담은 누구나 신청할 수 있나요?</summary><p>이사 날짜가 오늘부터 60일 안으로 정해진 투룸 이상 가정이사만 신청할 수 있습니다. 원룸·용달 이사나 날짜가 미정이면 버튼을 보여 주지 않습니다.</p></details>
     <p class="source" id="source"></p>
+    <section class="related" aria-label="함께 쓰면 좋은 계산기"><h2>함께 쓰면 좋은 계산기</h2><ul><li><a href="/life-calculator/tools/area/"><strong>평수 ↔ ㎡</strong><span>평과 제곱미터 바로 변환</span></a></li><li><a href="/life-calculator/tools/dday/"><strong>D-day</strong><span>이사일까지 남은 날</span></a></li><li><a href="/life-calculator/tools/internet/"><strong>인터넷 요금 비교</strong><span>이사하며 갈아탈지 비교</span></a></li><li><a href="/life-calculator/tools/water-rental/"><strong>정수기 렌탈 총비용</strong><span>새 집 정수기 총비용</span></a></li></ul></section>
   </article>
   <aside>
     <div class="box">
@@ -142,7 +181,9 @@
 <footer class="site"><div class="wrap">
   <p><strong>생활계산서</strong> · 계산 결과는 참고용입니다. 고지서, 홈택스, 근로계약, 대출 약정과 다를 수 있습니다.</p>
   <p class="fine">2026년 공개 요율을 반영했습니다. 요율이 바뀌면 고지서나 공식 안내가 우선합니다. 개인정보는 서버에 보내지 않고 브라우저에서만 계산합니다. 개인을 식별하지 않는 방문 통계(페이지 조회·계산 실행·버튼 클릭 수)만 수집하며, 쿠키·IP·입력값은 저장하지 않습니다.</p>
-  <p class="fine">GitHub Pages로 배포하는 정적 사이트입니다.</p>
+  <p class="fine foot-disclosure">일부 계산기의 상담 버튼은 광고(제휴) 링크입니다. 버튼을 통해 상담을 신청하면 운영자(쥬라프)는 제휴 수수료를 받을 수 있으며, 계산식과 계산 결과는 제휴 여부와 관계없이 같습니다.</p>
+  <nav class="foot-links" aria-label="사이트 정보"><a href="/life-calculator/about/">운영자 정보</a><a href="/life-calculator/methodology/">계산 기준·출처</a><a href="/life-calculator/privacy/">개인정보처리방침</a><a href="/life-calculator/disclosure/">광고·제휴 안내</a></nav>
+  <p class="fine">운영: 쥬라프 (개인사업자 266-31-02086) · 문의 <a href="mailto:biojuho@gmail.com">biojuho@gmail.com</a> · GitHub Pages로 배포하는 정적 사이트입니다.</p>
 </div></footer>
 <script>
 document.querySelector('.hamb')?.addEventListener('click', (e)=>{
@@ -198,7 +239,10 @@ function run(e){
     table='<p class="sub">받아 둔 견적 금액을 넣으면 항목 합계를 같은 기준으로 비교합니다.</p>';
   }
   const o=$('#out'); o.hidden=false;
-  o.innerHTML=`<p class="sub">전용 ${m2.toLocaleString('ko-KR')}㎡</p><p class="big">${py.toLocaleString('ko-KR',{maximumFractionDigits:2})}평</p><p class="sub">${dayLine}</p>${table}`;
+  const best=cmp.filled>=2?cmp.rows.find(r=>r.total===cmp.min):null;
+  const verdict=best?`<p class="verdict">넣은 견적 중 총액이 가장 적은 곳: ${best.label} ${won(best.total)}</p>`:`<p class="verdict">전용 ${m2.toLocaleString('ko-KR')}㎡는 약 ${py.toLocaleString('ko-KR',{maximumFractionDigits:2})}평입니다. 견적을 2곳 이상 넣으면 같은 기준으로 비교합니다.</p>`;
+  const facts=tableRows(['항목','값'],[['전용면적',`${m2.toLocaleString('ko-KR')}㎡`],['평 환산',`${py.toLocaleString('ko-KR',{maximumFractionDigits:2})}평`],['이사일',days===null?'미입력':dayLine]]);
+  o.innerHTML=`<p class="sub">전용 ${m2.toLocaleString('ko-KR')}㎡</p><p class="big">${py.toLocaleString('ko-KR',{maximumFractionDigits:2})}평</p><p class="sub">${dayLine}</p>${verdict}${facts}${table}`;
   gate();
 }
 function gate(){
