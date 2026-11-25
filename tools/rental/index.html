@@ -144,7 +144,7 @@ function run(e){ e?.preventDefault();
     cmp += r.breakEven ? `<p class="sub">${r.breakEven}개월째부터 구매 쪽 누적 비용이 더 적어집니다.</p>` : `<p class="sub">의무 기간 안에서는 렌탈 누적 비용이 계속 더 적습니다.</p>`;
   }
   const o=$('#out'); o.hidden=false;
-  o.innerHTML=`<p class="sub">${r.months}개월 렌탈 실제 총비용</p><p class="big">${won(r.rental)}</p><p class="sub">한 달 평균 ${won(r.rentalMonthly)}</p>${cmp}`;
+  o.innerHTML=`<p class="sub">${r.months}개월 렌탈 실제 총비용</p><p class="big">${won(r.rental)}</p><p class="sub">한 달 평균 ${won(r.rentalMonthly)}</p><p class="verdict">하루로 치면 약 ${won(Math.round(r.rentalMonthly/30))}이에요.</p>${cmp}`;
 }
 $('#f').addEventListener('submit',run);
 </script>

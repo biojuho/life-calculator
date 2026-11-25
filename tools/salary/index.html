@@ -133,13 +133,15 @@ import { takeHome, formatWon } from '../../js/calc.mjs';
 import { $, num, won, bindWonInputs, tableRows } from '../../js/ui.js';
 bindWonInputs();
 const note=`국민연금 근로자 4.75%, 건강보험 3.595%, 장기요양 건강보험료의 13.14%, 고용보험 0.9%. 국민연금 기준소득월액 하한 41만원·상한 659만원(2026년 7월~2027년 6월, 보건복지부고시 제2026-31호). 근로소득세는 소득세법 시행령 별표2 간이세액표(2026.2.27. 개정, 2026.3.1. 적용) 100% 기준이며, 지방소득세는 그 10%(원 미만 절사)입니다. 연말정산·건강보험 정산·회사 복지에 따라 실제 명세서와 다를 수 있습니다.`;
-$('#source').textContent='근거: 보건복지부고시 제2026-31호, 소득세법 시행령 별표2, 국민건강보험 2026년 요율, 고용보험 실업급여 근로자 부담 0.9%.';
+$('#source').textContent='근거: 보건복지부고시 제2026-31호, 소득세법 시행령 별표2, 국민건강보험 2026년 요율, 고용보험 실업급여 근로자 부담 0.9%. 최저임금 비교: 고용노동부고시 제2025-47호(시급 10,320원, 월 환산 209시간 2,156,880원).';
+{ const q=new URLSearchParams(location.search), a=Number(q.get('annual')); if(Number.isFinite(a)&&a>=1000000&&a<=2000000000){ $('#annual').value=Math.floor(a).toLocaleString('ko-KR'); } const nt=Number(q.get('nontax')); if(Number.isFinite(nt)&&nt>0&&nt<=10000000){ $('#nontax').value=Math.floor(nt).toLocaleString('ko-KR'); } }
 $('#note').textContent=note;
 function run(e){ e?.preventDefault();
   const r=takeHome({annual:num($('#annual')), nontaxable:num($('#nontax')), dependents:+$('#dep').value, children8to20:+$('#kids').value, ratePct:+$('#rate').value});
   const out=$('#out'); out.hidden=false;
   out.innerHTML=`<p class="sub">월 실수령액</p><p class="big">${won(r.netMonth)}</p>
-  <p class="sub">연 실수령액 ${won(r.netYear)} · 세전 월급 ${won(r.monthly)}</p>`+
+  <p class="sub">연 실수령액 ${won(r.netYear)} · 세전 월급 ${won(r.monthly)}</p>
+  <p class="verdict">세전 월급의 ${r.monthly?Math.round(r.netMonth/r.monthly*1000)/10:0}%를 받아요. 세전 월급은 2026년 최저임금 월 환산액(2,156,880원)의 ${(r.monthly/2156880).toFixed(1)}배예요.</p>`+
   tableRows(['항목','금액'],[
     ['세전 월급',won(r.monthly)],
     ['비과세',won(r.nontaxable)],
