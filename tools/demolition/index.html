@@ -145,7 +145,7 @@ $('#age').addEventListener('input', gate);
 function run(e){ e?.preventDefault();
   let r; try{ r=demolitionEstimate({pyeong:Number(String($('#pyeong').value).replace(/,/g,''))||0,m2:Number(String($('#m2').value).replace(/,/g,''))||0,unitCost:num($('#unitCost'))}); }catch(err){ const o=$('#out'); o.hidden=false; o.textContent=err.message; return; }
   const o=$('#out'); o.hidden=false;
-  o.innerHTML=`<p class="sub">${r.pyeong}평 기준 가늠 범위 (중간값)</p><p class="big">${won(r.mid)}</p><p class="sub">낮은 쪽 ${won(r.low)} ~ 높은 쪽 ${won(r.high)} (±20%). 견적 금액은 현장 확인 후 확정됩니다.</p>`;
+  o.innerHTML=`<p class="sub">${r.pyeong}평 기준 가늠 범위 (중간값)</p><p class="big">${won(r.mid)}</p><p class="verdict">${r.pyeong>0?'평당 약 '+won(Math.round(r.mid/r.pyeong))+' 기준 가늠이에요.':'면적을 넣으면 평당 금액이 나와요.'}</p><p class="sub">낮은 쪽 ${won(r.low)} ~ 높은 쪽 ${won(r.high)} (±20%). 견적 금액은 현장 확인 후 확정됩니다.</p>`;
   gate();
 }
 $('#f').addEventListener('submit',run);

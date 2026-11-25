@@ -141,6 +141,7 @@ function run(e){ e?.preventDefault();
   const rows=r.schedule.slice(0,24).map(s=>[s.month+'개월',won(s.payment),won(s.principal),won(s.interest),won(s.balance)]);
   out.innerHTML=`<p class="sub">${method==='eqprin'?'원금균등':'원리금균등'} 월 납입</p><p class="big">${method==='eqprin'?won(r.monthlyFirst):won(r.monthly)}</p>
   <p class="sub">${head}<br>이자 합계 ${won(r.totalInterest)} · 총 상환 ${won(r.totalPay)}</p>
+  <p class="verdict">빌린 돈의 ${P?Math.round(r.totalInterest/P*1000)/10:0}%를 이자로 내요. ${n}개월 동안 총 ${won(r.totalPay)}를 갚습니다.</p>
   <p class="fine">아래는 앞 24회차입니다. 전체 ${r.schedule.length}회.</p>
   <div class="sched">${tableRows(['회차','납입','원금','이자','잔액'], rows)}</div>`;
 }

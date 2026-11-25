@@ -140,7 +140,7 @@ function run(e){ e?.preventDefault();
   const season=$('#season').value;
   const r=electricityBill({kwh:Number($('#kwh').value)||0, summer:season==='summer', winter:season==='winter', voltage:$('#volt').value, fuel:Number($('#fuel').value)||0});
   const out=$('#out'); out.hidden=false;
-  out.innerHTML=`<p class="sub">추정 청구금액 · ${r.step}단계</p><p class="big">${won(r.bill)}</p>`+
+  out.innerHTML=`<p class="sub">추정 청구금액 · ${r.step}단계</p><p class="big">${won(r.bill)}</p><p class="verdict${r.step>1?' warn':''}">${r.step===1?'누진 1단계, 가장 낮은 단가 구간이에요.':'누진 '+r.step+'단계예요. 사용량이 1단계 구간을 넘어 kWh당 단가가 올라갔어요.'}</p>`+
   tableRows(['항목','금액'],[
     ['기본요금',won(r.base)],
     ['전력량요금 (원 미만 절사)',won(r.energy)],
