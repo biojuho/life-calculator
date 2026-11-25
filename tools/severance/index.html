@@ -148,6 +148,7 @@ function run(e){ e?.preventDefault();
   const r=severancePay({wage3monthTotal:wage, days3month:days, serviceDays:service, ordinaryDaily:ord||0});
   const out=$('#out'); out.hidden=false;
   out.innerHTML=`<p class="sub">추정 퇴직금</p><p class="big">${won(r.amount)}</p>
+  <p class="verdict">${service>=365?'재직 1년 이상이라 퇴직금 대상일 수 있어요(4주 평균 주 15시간 이상 근무 조건).':'재직 1년 미만이면 법정 퇴직금 대상이 아니에요.'}</p>
   <p class="sub">재직 ${service}일 (${(service/365).toFixed(2)}년) · 퇴직일 자체는 재직 일수에 넣지 않는 방식이 일반적이므로, 입사일부터 퇴직일 전날까지로 바꾸려면 퇴직일을 하루 앞당겨 입력하세요.</p>`+
   tableRows(['항목','값'],[
     ['3개월 임금 합계',won(wage)],
