@@ -135,3 +135,15 @@ button:disabled, button[aria-disabled="true"], .btn[aria-disabled="true"]{
 .share-bar button[data-share="kakao"]{background:#FEE500;border-color:#FEE500;color:#191919}
 .share-bar .share-toast{margin:8px 0 0;font-size:13px;color:var(--ink2)}
 html.embed .share-bar{display:none}
+
+.cta-box fieldset.gate{border:0;padding:0;margin:8px 0 12px}
+.cta-box fieldset.gate legend{font-size:14px;font-weight:700;margin-bottom:6px}
+.cta-box fieldset.gate label{display:inline-flex;align-items:center;gap:6px;margin-right:16px;margin-bottom:4px;font-size:15px}
+.cta-box .gate-q{margin:12px 0 4px;font-weight:700}
+.cta-box .check-line{display:flex;align-items:flex-start;gap:8px;margin:8px 0;font-size:15px;line-height:1.45}
+.cta-box .lock-line{margin:10px 0}
+.cta-box a.cta-go{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none}
+.cta-box a.cta-go.is-disabled, .cta-box a.cta-go[aria-disabled="true"]{pointer-events:none}
+.check-line{display:flex;align-items:flex-start;gap:8px;margin:6px 0;font-size:15px}
+.info-box{margin-top:18px;border:1px solid var(--rule2);border-radius:var(--radius);padding:14px 16px;background:#fff}
+.info-box .cta-go{display:inline-block;width:auto;margin-top:10px;padding:10px 16px;font-size:15px;text-decoration:none}
