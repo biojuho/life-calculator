@@ -147,7 +147,7 @@ function run(e){ e?.preventDefault();
     if(r.stage==='expired' && r.paidExtraEstimate>0) extra+=`<p class="sub">만료 뒤 약 ${r.expiredMonths}개월 동안 차액만큼 더 냈다면 약 <strong>${won(r.paidExtraEstimate)}</strong>입니다(추정).</p>`;
   }
   const o=$('#out'); o.hidden=false;
-  o.innerHTML=`<p class="sub">${start} 가입 · ${$('#months').value}개월 약정</p><p class="big">${r.end}</p><p class="sub">${label} · 약정 진행 ${r.pct}%</p><p class="sub">${msgs[r.stage]}</p>${extra}`;
+  o.innerHTML=`<p class="sub">${start} 가입 · ${$('#months').value}개월 약정</p><p class="big">${r.end}</p><p class="sub">${label} · 약정 진행 ${r.pct}%</p><p class="sub verdict">${msgs[r.stage]}</p>${extra}`;
   const show = r.stage==='soon'||r.stage==='expired';
   $('#next').hidden=!show;
   if(show) $('#nextMsg').textContent = r.stage==='expired' ? '약정이 끝났다면, 유지·재약정·변경 세 가지의 3년 총비용을 한 번에 비교해 보세요.' : '만료 전이라면 남은 위약금까지 넣어서 지금 바꾸는 게 이득인지 비교해 보세요.';
