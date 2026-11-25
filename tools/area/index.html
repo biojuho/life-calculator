@@ -185,7 +185,10 @@ function show(){
 $('#py').addEventListener('input',fromP);
 $('#m2').addEventListener('input',fromM);
 $('#f').addEventListener('submit',e=>{e.preventDefault();fromP();});
-fromP();
+{ const q=new URLSearchParams(location.search), qm=Number(q.get('m2')), qp=Number(q.get('py'));
+  if(q.get('m2')&&Number.isFinite(qm)&&qm>0&&qm<100000){ $('#m2').value=String(qm); fromM(); }
+  else if(q.get('py')&&Number.isFinite(qp)&&qp>0&&qp<30000){ $('#py').value=String(qp); fromP(); }
+  else fromP(); }
 
 </script>
 </body>
