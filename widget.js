@@ -6,7 +6,7 @@
 (function () {
   'use strict';
   var BASE = 'https://biojuho.github.io/life-calculator/tools/';
-  var TOOLS = ['salary', 'loan', 'severance', 'vat', 'electricity', 'area', 'dday', 'internet', 'internet-contract', 'rental', 'counter', 'car-lease', 'tutoring', 'demolition', 'tire-rental'];
+  var TOOLS = ['salary', 'loan', 'severance', 'vat', 'electricity', 'area', 'moving', 'dday', 'internet', 'internet-contract', 'rental', 'water-rental', 'counter', 'car-lease', 'tutoring', 'demolition', 'tire-rental'];
   function src(tool, partner) {
     if (TOOLS.indexOf(tool) < 0) return null;
     var p = String(partner || 'unknown').replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 40) || 'unknown';
