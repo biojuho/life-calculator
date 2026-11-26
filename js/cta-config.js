@@ -24,7 +24,7 @@ export const CTA = {
     audience: '약정 끝난 분 대상 상담입니다.',
     stayNote: '지금 쓰는 통신사를 그대로 유지하면 혜택이 없습니다.',
     restriction: '연체·미성년자·신용불량자는 신청 불가',
-    disclosure: '이 버튼을 통한 상담 신청 시 운영자는 제휴 수수료를 받을 수 있습니다.',
+    disclosure: '이 버튼을 통한 상담 신청 시 운영자는 제휴 수수료를 제공받습니다.',
     consultOnly: '상담만 요청, 가입은 나중에',
     heroCaption: '이미지는 AI로 만든 예시입니다',
   },

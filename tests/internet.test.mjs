@@ -66,7 +66,7 @@ test('CTA 설정: 디비센스 인터넷 비교원 필수 문구와 대가성 �
   assert.match(CTA.internet.badgeNote, /캠페인에 안내된 금액/);
   assert.match(CTA.internet.stayNote, /유지하면 혜택이 없/);
   assert.equal(CTA.internet.restriction, '연체·미성년자·신용불량자는 신청 불가');
-  assert.equal(CTA.internet.disclosure, '이 버튼을 통한 상담 신청 시 운영자는 제휴 수수료를 받을 수 있습니다.');
+  assert.equal(CTA.internet.disclosure, '이 버튼을 통한 상담 신청 시 운영자는 제휴 수수료를 제공받습니다.');
   assert.equal(CTA.internet.heroCaption, '이미지는 AI로 만든 예시입니다');
   assert.match(read('tools/internet/index.html'), /예시값/);
 });
@@ -245,7 +245,7 @@ test('CTA·진단 HTML: 계산 숫자와 필수 문구, enabled가 꺼지면 버
   assert.match(html, /인터넷 약정 끝나는 분\?/);
   assert.match(html, /지금 쓰는 통신사를 그대로 유지하면 혜택이 없습니다/);
   assert.match(html, /연체·미성년자·신용불량자는 신청 불가/);
-  assert.match(html, /이 버튼을 통한 상담 신청 시 운영자는 제휴 수수료를 받을 수 있습니다/);
+  assert.match(html, /이 버튼을 통한 상담 신청 시 운영자는 제휴 수수료를 제공받습니다/);
   assert.match(html, /상담만 요청, 가입은 나중에/);
   assert.match(html, /계산/);
   assert.match(html, /무료 상담 신청/);
