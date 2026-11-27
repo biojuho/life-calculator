@@ -14,7 +14,7 @@ export const CTA = {
     url: 'https://l7nopd392j.sens.kr',
     campaignId: 'dbsense_internet_l7no', // 통계 cta_click에 붙는 캠페인 ID (개인정보 아님)
     enabled: true,
-    label: '30초 만에 내 인터넷 혜택·절약액 확인하기 →',
+    label: '30초 만에 상담 받고 절약액 확인하기 →',
     weakLabel: '만료 달력만 받아 두기',
     eyebrow: '광고 · 제휴 링크 · 디비센스',
     headline: '인터넷 약정 끝나는 분? 그대로 두면 매달 현금 혜택을 그냥 놓칩니다',
